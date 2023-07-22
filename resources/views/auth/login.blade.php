@@ -1,17 +1,17 @@
 @extends('layout')
 
 @section('content')
-    <section class="vh-70 gradient-custom">
+    {{-- <section class="vh-70"> --}}
         <div class="py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-sm-6 col-xl-4">
-                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card border-dark text-dark" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
 
-                            <div class="mb-md-5 mt-md-4 pb-5">
+                            <div class="mb-md-5 mt-md-2 pb-2">
 
                                 <h2 class="fw-bold mb-1 text-uppercase">Login</h2>
-                                <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                                <p class="text-dark-50 mb-5">Please enter your login and password!</p>
                                 
                                 <form method="POST" action="{{ route('login') }}">
                                 @csrf
@@ -49,12 +49,12 @@
                                         @enderror
                                 </div>
 
-                                <button class="btn btn-outline-light btn-lg w-100" type="submit">Login</button>
+                                <button class="btn btn-outline-dark btn-lg w-100" type="submit">Login</button>
 
                                 <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                                    <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                                    <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                                    <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                                    <a href="#!" class="text-dark"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                    <a href="#!" class="text-dark"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                    <a href="#!" class="text-dark"><i class="fab fa-google fa-lg"></i></a>
                                 </div>
                                 </form>
                             </div>
@@ -63,7 +63,7 @@
                                 <p class="mb-0">Don't have an account? 
                                     @if (Route::has('register'))
                                     <a href="{{ route('register') }}"
-                                        class="text-white-50 fw-bold">Sign Up</a>
+                                        class="text-dark-50 fw-bold">Sign Up</a>
                                     @endif
                                 </p>
                             </div>

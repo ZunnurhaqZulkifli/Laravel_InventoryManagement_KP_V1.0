@@ -14,7 +14,7 @@ class ProductsSeeder extends Seeder
     public function run()
     {
         Products::create([
-            'name' => 'Coca Cola',
+            'name' => 'Cola Small',
             'brand_id' => 1,
             'category_id' => 1,
             'price' => 1.20,
@@ -24,7 +24,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Coca Cola',
+            'name' => 'Cola Tin',
             'brand_id' => 1,
             'category_id' => 1,
             'price' => 2.00,
@@ -34,7 +34,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Coca Cola',
+            'name' => 'Coca Big-Bottle',
             'brand_id' => 1,
             'category_id' => 1,
             'price' => 2.80,

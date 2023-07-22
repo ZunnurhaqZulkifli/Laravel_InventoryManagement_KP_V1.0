@@ -24,13 +24,13 @@ class HomeController extends Controller
         $hotitems = Products::with('brand')->orderBy('price', 'desc')->take(3)->get();
         $sales = Sales::orderBy('created_at', 'desc')->take(3)->get();
         $hotimages = Products::with('brand')->orderBy('price', 'desc')->take(4)->get();
-        $lowstocks = Products::orderBy('quantity', 'asc')->take(5)->get();
+        $lowstocks = Products::where('quantity', '<=' , '2')->get();
         $total = Sales::all()->sum('totalSales');
 
         // $images = Products::orderBy('price', 'desc')->get()->all();
         $images = Gallery::orderBy('created_at', 'asc')->take(3)->get();        
         $brands = Brand::all();
-        // dd($images);
+        // dd($lowstocks);
 
         return view('home.home', [
             'hotitems' => $hotitems,

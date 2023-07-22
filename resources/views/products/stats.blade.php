@@ -4,7 +4,7 @@
     <div class="container p-4">
         <div class="display-4 mt-2">Product's Stats</div>
         <div class="p-4 row">
-            <div class="col-6">
+            <div class="col-9">
                 <div class="card">
                     <div class="mt-2 h4 text-center">Product Prices</div>
 
@@ -13,7 +13,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Products</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Variation</th>
                                     <th scope="col">Brand</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Qty</th>
@@ -26,10 +27,11 @@
                                         <tr>
                                             <th scope="row">{{ $key++ }}</th>
                                             <td href="" class="">{{ $product->name }}</td>
+                                            <td href="" class="">{{ $product->variation->name }}</td>
                                             <td href="" class="">{{ $product->brand->name }}</td>
                                             <td href="" class="">{{ $product->price }}</td>
-                                            @if ($product->quantity <= 1)
-                                                <td href="" class="ps-3 bg-danger">{{ $product->quantity }}</td>
+                                            @if ($product->quantity < 3)
+                                                <td href="" class="ps-3 bg-danger text-light">{{ $product->quantity }}</td>
                                             @else
                                                 <td href="" class="ps-3">{{ $product->quantity }}</td>    
                                             @endif
@@ -88,8 +90,6 @@
                         @endforeach
                     </div>
                 </div> --}}
-
-
                 </div>
             </div>
         </div>

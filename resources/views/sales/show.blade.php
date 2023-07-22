@@ -10,7 +10,7 @@
         <div class="card w-50">
             <div class="p-4">
                 
-                <a href="" class="">Recipt ID :{{ $sale->id }} / {{ $sale->created_at }}</a>
+                <a class="text-decoration-none text-dark" >Recipt ID_{{ $sale->id }} {{ $sale->created_at }}</a>
                 <br>
                 <a>Items Sold</a>
                 <br>
@@ -27,7 +27,7 @@
                 <hr>
 
                 <div class="card">
-                    <div class="p-1">
+                    <div class="p-1 justify-content-center mx-auto">
                         <a>TOTAL = RM{{ $sale->totalSales }}</a>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ class SalesController extends Controller
     {
         // $products = Products::all();
         $sale = Sales::findOrFail($id);
-        $items = explode( ',', $sale->items);
+        $items = explode( '|', $sale->items);
         $quantities = explode( ',', $sale->quantity);
 
         return view('sales.show', [

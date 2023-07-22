@@ -43,7 +43,7 @@ class BrandsController extends Controller
     public function store(StoreBrands $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|min:1|max:20',
+            'name' => 'required|min:1|max:200',
             'category_id' => 'required|exists:categories,id',
             'variation_id' => 'required|exists:variations,id',
         ]);

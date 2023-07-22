@@ -14,13 +14,13 @@ class BrandsSeeder extends Seeder
      */
     public function run()
     {
-        Brand::create([
+    Brand::create([
             'name' => 'Coca Cola',
             'category_id' => 1,
         ]);
 
         Brand::create([
-            'name' => 'Milo',
+            'name' => 'Nestle',
             'category_id' => 1,
         ]);
 

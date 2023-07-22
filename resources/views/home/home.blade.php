@@ -12,7 +12,11 @@
                     <form class="d-flex" action="{{ route('products.all') }}" method="GET" role="search">
                         <input class="form-control" type="text" name="term" id="term" placeholder="Search"
                             aria-label="Search">
-                            <div class="ps-2"></div>
+
+                            <div class="ps-1"></div>
+                            <div class="vr"></div>
+                            <div class="ps-1"></div>
+                
                         <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #198754;"></i></button>
                     </form>
                 </div>
@@ -51,13 +55,13 @@
                         @if ($hotimage->image)
                             <div class="mx-auto mb-2">
                                 <a href="{{ route('products.show', [$hotimage->id]) }}" class=""><img
-                                        class="card img-fluid object-fit-cover" src="{{ $hotimage->image->url() }}"
+                                        class="card img-fluid object-fit-contain" src="{{ $hotimage->image->url() }}"
                                         style="width:15em; height:7em;">
                                 </a>
                                 <a class="text-dark text-decoration-none">({{ $hotimage->brand->name}}-{{ $hotimage->name }})</a>
                             </div>
                         @else
-                            <div class="card">
+                            <div class="btn btn-sm btn-outline-dark">
                                 <a class="text-dark"
                                     href="{{ route('products.edit', [$hotimage->id]) }}">{{ $hotimage->name }}</a>
                             </div>
@@ -110,7 +114,7 @@
                 <div class="p-2">
                     @foreach ($hotitems as $hotitem)
                         <a class="btn btn-sm w-100 btn-outline-dark mb-2"
-                            href="{{ route('brands.show', [$hotitem->brand->id]) }}">{{ $hotitem->name }}</a>
+                            href="{{ route('brands.show', [$hotitem->brand->id]) }}">{{ $hotitem->brand->name }} . {{ $hotitem->name }}</a>
                         <br>
                     @endforeach
                 </div>

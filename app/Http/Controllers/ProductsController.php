@@ -106,7 +106,13 @@ class ProductsController extends Controller
         // dd($totalQuantity);
 
         return view('products.all',
-            ['products' => $products, 'brandName' => $brandName, 'totalQuantity' => $totalQuantity])->with('i', (request()->input('page', 1)) * 5);
+            [
+                'products' => $products,
+                'brandName' => $brandName,
+                'totalQuantity' => $totalQuantity,
+                'key' => $key = 1,
+                ]) ->with('i', (request()->input('page', 1)) * 5
+            );
     }
 
     public function store(StoreProducts $request)

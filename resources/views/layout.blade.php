@@ -78,7 +78,7 @@
                 <div class="p-4">
                     <h5 class="offcanvas-title text-center" id="offcanvasScrollingLabel">Master Control</h5>
                     <hr>
-                    <div class="d-flex">
+                    <div class="d-flex justify-content-center">
                         <a class="btn btn-outline-dark" href="{{ url()->previous() }}">
                             <i class="fa-solid fa-chevron-left" style="color: #000000;"></i>BACK</a>
 
