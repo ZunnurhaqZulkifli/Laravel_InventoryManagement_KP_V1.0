@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->decimal("totalSales", 6,2);
-            $table->longText('products_id');
+            $table->string('items')->nullable();
+            $table->uuid('quantity')->nullable();
         });
     }
 

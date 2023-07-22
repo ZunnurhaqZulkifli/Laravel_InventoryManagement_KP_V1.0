@@ -28,8 +28,7 @@ class HomeController extends Controller
         $total = Sales::all()->sum('totalSales');
 
         // $images = Products::orderBy('price', 'desc')->get()->all();
-        $images = Gallery::orderBy('created_at', 'asc')->take(3)->get();
-        
+        $images = Gallery::orderBy('created_at', 'asc')->take(3)->get();        
         $brands = Brand::all();
         // dd($images);
 

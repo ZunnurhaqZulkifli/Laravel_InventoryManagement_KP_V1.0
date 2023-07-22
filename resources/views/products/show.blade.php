@@ -40,6 +40,7 @@
                             <hr class="mb-2">
                             <div class="d-flex mb-0">
                                 <a class="btn btn-outline-primary w-100 btn-sm" href="{{ route('products.edit', [$products->id]) }}">Edit</a>
+                                <dov class="ps-1"></dov>
                                 <a class="btn btn-outline-success w-75 btn-sm" href="{{ route('addproducts.to.cart', [$products->id]) }}">Add To Cart</a>
                             </div>
                         </div>

@@ -18,12 +18,15 @@ class SalesController extends Controller
 
     public function show($id)
     {
-        $products = Products::all();
+        // $products = Products::all();
         $sale = Sales::findOrFail($id);
+        $items = explode( ',', $sale->items);
+        $quantities = explode( ',', $sale->quantity);
 
         return view('sales.show', [
             'sale' => $sale,
-            'items' => $sale->products_id,
+            'items' => $items,
+            'quantities' => $quantities,
         ]);
     }
 
@@ -37,27 +40,28 @@ class SalesController extends Controller
 
         if ($totalSales > 0) {
 
-            $products = session()->get('cart', []);
+            $products = session()->get('cart');
 
-            foreach ($products as $product) {
-                $productIds[] = $product['name'];
-            }
+            $q0 = collect($products)->pluck('brand', 'name')->
+            implode(',', array_map(function ($item) {
+                return implode(',', $item);
+            }, $products));
 
-            $item = implode(' , ', $productIds);
-
-            $validatedData = $request->validate([
+            $q1 = collect($products)->pluck('quantity')->
+            implode(',', array_map(function ($item) {
+                return implode(',', $item);
+            }, $products));
+            
+            $sale = Sales::create([
                 'totalSales' => $request->input('totalPrice'),
+                'items' => $q0,
+                'quantity' => $q1,
             ]);
 
             foreach ($cart as $key => $value) {
                 unset($cart[$key]);
                 session()->put('cart', $cart);
             }
-
-            $sale = new Sales();
-            $sale->totalSales = $request->input('totalPrice');
-            $sale->products_id = $item;
-            $sale->save();
 
             return redirect()->route('sales.record')->with('success', 'Sales Good!');
 
@@ -67,14 +71,11 @@ class SalesController extends Controller
 
     }
 
-    public function sales(Request $request)
+    public function sales()
     {
         $sales = Sales::orderBy('created_at', 'desc')->get();
         $products = Products::all();
         $total = Sales::all()->sum('totalSales');
-
-        // dd($total);
-        
 
         return view('sales.record', compact('sales', 'products', 'total'));
     }

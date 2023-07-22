@@ -45,7 +45,7 @@
             <hr>
 
             <div class="card">
-                <div class="h4 text-center">Good Products</div>
+                <div class="h4 text-center mt-2">Good Products</div>
                 <div class="p-1 mx-auto row row-cols-md-4 g-4">
                     @foreach ($hotimages as $hotimage)
                         @if ($hotimage->image)
