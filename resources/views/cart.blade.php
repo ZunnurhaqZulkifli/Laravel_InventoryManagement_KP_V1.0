@@ -106,22 +106,26 @@
 
         <div class="col-3 mt-4">
             <div class="card rounded-0">
-                <div class="display-6 ps-2 text-center">Return Back</div>
-                <p class="ps-2">Please do take note, that this feature is experimental and not accurate</p>
-                <div class="p-2">
-                    <div class="card">
-                        <form id="cart-form">
+                <div class="p-2 text-center">
+                    <div class="display-6 ps-2">Return Back</div>
+                    <p class="ps-2">Please do take note, that this feature is experimental and not accurate</p>
+
+                        <div class="card">
+                            <form id="cart-form">
+                                <div class="p-2">
+                                    <label>CASH GIVEN (RM)</label>
+                                    <input type="number" name="cash" id="cash" value="0" class="form-control"
+                                        max="50">
+                                    <input type="number" name="tp" id="tp"
+                                        value="{{ number_format($totalPrice, 2) }}" hidden>
+                                </div>
+                            </form>
                             <div class="p-2">
-                                <label>CASH GIVEN (RM)</label>
-                                <input type="number" name="cash" id="cash" value="0" class="form-control" max="50">
-                                <input type="number" name="tp" id="tp"
-                                    value="{{ number_format($totalPrice, 2) }}" hidden>
+                                <div class="btn btn-sm disabled w-100" id="totalPayableAmount"></div>
                             </div>
-                        </form>
-                        <div class="p-2">
-                            <div id="totalPayableAmount"></div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
