@@ -5,7 +5,22 @@
 @section('content')
     <div class="container">
 
-        <div></div>
+        <div class="card rounded-0">
+            <div class="p-2">
+                <p class="text-danger text-center">
+                    **** Please Take Note ****
+                    <br>
+                    1. All items has to be "saled" out in order to make sure that item is not "magically" gone, 
+                    especially if the session timed-out.
+                    
+                    <br>
+                    2. The use of customer return money is experimental, double check the price!.
+
+                    <br>
+                    3. Make Sure all of the items is the right item, brand, price and more.
+                </p>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-9">
@@ -110,25 +125,25 @@
                     <div class="display-6 ps-2">Return Back</div>
                     <p class="ps-2">Please do take note, that this feature is experimental and not accurate</p>
 
-                        <div class="card">
-                            <form id="cart-form">
-                                <div class="p-2">
-                                    <label>CASH GIVEN (RM)</label>
-                                    <input type="number" name="cash" id="cash" value="0" class="form-control"
-                                        max="50">
-                                    <input type="number" name="tp" id="tp"
-                                        value="{{ number_format($totalPrice, 2) }}" hidden>
-                                </div>
-                            </form>
+                    <div class="card">
+                        <form id="cart-form">
                             <div class="p-2">
-                                <div class="btn btn-sm disabled w-100" id="totalPayableAmount"></div>
+                                <label>CASH GIVEN (RM)</label>
+                                <input type="number" name="cash" id="cash" value="0" class="form-control"
+                                    max="50">
+                                <input type="number" name="tp" id="tp"
+                                    value="{{ number_format($totalPrice, 2) }}" hidden>
                             </div>
+                        </form>
+                        <div class="p-2">
+                            <div class="btn btn-sm disabled w-100" id="totalPayableAmount"></div>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
+    </div>
 
     </div>
     </div>
