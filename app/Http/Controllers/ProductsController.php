@@ -284,7 +284,7 @@ class ProductsController extends Controller
         $cash = $request->input('cash') * 100;
         $tp = $request->input('tp') * 100;
         $tpa = max($cash - $tp, 0);
-        $totalPayableAmount = number_format($tpa / 100 - 0.20, 2);
+        $totalPayableAmount = number_format($tpa / 100, 2);
 
         return response()->json(['totalPayableAmount' => $totalPayableAmount]);
     }
