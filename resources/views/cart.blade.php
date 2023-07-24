@@ -15,6 +15,7 @@
                     <th>Remove</th>
                 </tr>
             </thead>
+
             <tbody>
                 @if (session('cart'))
                     @foreach (session('cart') as $id => $details)
@@ -58,82 +59,130 @@
                             <form action="{{ route('sales.add') }}" method="POST">
                                 @csrf
                                 <div class="d-flex">
-                                    <a href="{{ route('products.all') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i>
+                                    <a href="{{ route('products.all') }}" class="btn btn-primary"><i
+                                            class="fa fa-angle-left"></i>
                                         All Products
                                     </a>
 
                                     <div class="ps-1"></div>
-    
-                                    <input type="hidden" name="totalPrice" value="{{ $totalPrice }}">
-                                <button class="btn btn-success" type="submit">Sale</button>
-                            </form>
 
+                                    <input type="hidden" name="totalPrice" value="{{ $totalPrice }}">
+                                    <button class="btn btn-success" type="submit">Sale</button>
+                            </form>
                         @else
                             <div class="d-flex">
-                                <a href="{{ route('products.all') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i>
+                                <a href="{{ route('products.all') }}" class="btn btn-primary"><i
+                                        class="fa fa-angle-left"></i>
                                     All Products
                                 </a>
                                 <div class="ps-1"></div>
                             </div>
                         @endif
-                        </div>
-                    </td>
-                </tr>
-            </tfoot>
+    </div>
+    </td>
+    </tr>
+    </tfoot>
 
-            <tr>
-                <td colspan="1" class="text-right">
+    <tr>
+        <td colspan="1" class="text-right">
 
-                </td>
+        </td>
 
-                <td colspan="2" class="">
-                    <div class="p-2 fw-bold">Amount = RM{{ number_format($totalPrice, 2) }}</div>
-                </td>
+        <td colspan="2" class="">
+            <div class="p-2 fw-bold">Item Amount = RM{{ number_format($totalPrice, 2) }}</div>
+        </td>
 
-                <td colspan="5" class="text-right">
-                </td>
-            </tr>
-        </table>
+        <td colspan="5" class="text-right">
+        </td>
+    </tr>
+    </table>
 
-    @endsection
+    <hr>
 
-    @section('scripts')
-        <script type="text/javascript">
-            $(".edit-cart-info").change(function(e) {
-                e.preventDefault();
-                var ele = $(this);
+    <div class="card col-12">
+        <div class="display-6 ps-2">Return Back</div>
+        <div class="p-2">
+            <div class="card">
+                <form id="cart-form">
+                    <div class="p-2">
+                        <label>CASH</label>
+                        <input type="number" name="cash" id="cash" value="0"
+                            class="form-control">
+                        <input type="number" name="tp" id="tp" value="{{ number_format($totalPrice, 2) }}"
+                            hidden>
+                    </div>
+                </form>
+                <div class="p-2">
+                    <div id="totalPayableAmount"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+@endsection
+
+
+@section('scripts')
+    <script type="text/javascript">
+        $(".edit-cart-info").change(function(e) {
+            e.preventDefault();
+            var ele = $(this);
+            $.ajax({
+                url: '{{ route('update.sopping.cart') }}',
+                method: "patch",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.parents("tr").attr("rowId"),
+                },
+                success: function(response) {
+                    window.location.reload();
+                }
+            });
+        });
+
+        $(".delete-product").click(function(e) {
+            e.preventDefault();
+
+            var ele = $(this);
+
+            if (confirm("Do you really want to delete?")) {
                 $.ajax({
-                    url: '{{ route('update.sopping.cart') }}',
-                    method: "patch",
+                    url: '{{ route('delete.cart.product') }}',
+                    method: "DELETE",
                     data: {
                         _token: '{{ csrf_token() }}',
-                        id: ele.parents("tr").attr("rowId"),
+                        id: ele.parents("tr").attr("rowId")
                     },
                     success: function(response) {
                         window.location.reload();
                     }
                 });
-            });
+            }
+        });
 
-            $(".delete-product").click(function(e) {
-                e.preventDefault();
+        $(document).ready(function() {
+            function updatePayableAmount() {
+                var cash = parseInt($('#cash').val());
+                var tp = parseInt($('#tp').val());
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('calculatePayableAmount') }}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        tp: tp,
+                        cash: cash,
+                    },
+                    success: function(response) {
+                        $('#totalPayableAmount').text('Amount Return: ' + response
+                            .totalPayableAmount);
+                    },
+                });
+            }
 
-                var ele = $(this);
-
-                if (confirm("Do you really want to delete?")) {
-                    $.ajax({
-                        url: '{{ route('delete.cart.product') }}',
-                        method: "DELETE",
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            id: ele.parents("tr").attr("rowId")
-                        },
-                        success: function(response) {
-                            window.location.reload();
-                        }
-                    });
-                }
-            });
-        </script>
-    </div>
+            $('#cash').on('input', function() {
+                updatePayableAmount();
+            })
+            updatePayableAmount();
+        });
+    </script>
 @endsection

@@ -39,6 +39,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Brand</th>
                         <th scope="col">Variation</th>
+                        <th scope="col"></th>
                         <th scope="col">Category</th>
                         <th scope="col">Price</th>
                         <th scope="col ps-2">Quantity</th>
@@ -56,6 +57,7 @@
                                     href="{{ route('brands.show', [$product->brand->id]) }}">{{ $product->brand->name }}</a>
                             </td>
                             <td><a>{{ $product->variation->name }}</a></td>
+                            <td></td>
                             <td><a class="text-dark text-decoration-none"
                                     href="{{ route('categories.show', [$product->category->id]) }}">{{ $product->category->name }}</a>
                             </td>
@@ -89,7 +91,7 @@
 
         <div class="card mt-2 mb-4">
             <div class="">
-                <a href="{{ route('products.create') }}" class="btn btn-outline-primary w-100">Create a new Product</a>
+                <a href="{{ route('products.create') }}" class="btn btn-sm btn-outline-primary w-100">Create a new Product</a>
             </div>
         </div>
     </div>

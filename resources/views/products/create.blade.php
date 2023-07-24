@@ -13,12 +13,12 @@
                 @csrf
                     <div class="form-group">
                         <label>Product's Name</label>
-                        <input name="name" type="text" class="form-control" placeholder="Coca Cola" value="{{ old('name' , $product->name ?? null) }}" required>
+                        <input name="name" type="text" class="form-control" placeholder="Bundaberg (RootBeer)" value="{{ old('name' , $product->name ?? null) }}" required>
                     </div>
                 
                     <div class="form-group mt-2">
                         <label>Product's Price</label>
-                        <input name="price" type="float" class="form-control" placeholder="1.50" value="{{ old('price', $product->price ?? null) }}" required>
+                        <input name="price" type="float" class="form-control" placeholder="7.50" value="{{ old('price', $product->price ?? null) }}" required>
                     </div>
 
                     <div class="form-group mt-2">

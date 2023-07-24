@@ -7,7 +7,7 @@
 
             <div class="card">
                 <div class="p-4">
-                    <div class="fs-4 fw-bold text-center">Find Products <span class="fs-6 fw-light">powered by ~z.z~</span>
+                    <div class="fs-4 fw-bold mt-1 text-center">Find Products <span class="fs-6 fw-light">powered by ~z.z~</span>
                     </div>
                     <form class="d-flex" action="{{ route('products.all') }}" method="GET" role="search">
                         <input class="form-control" type="text" name="term" id="term" placeholder="Search"
@@ -86,37 +86,13 @@
         <div class="col-3 text-center">
             
             <div class="card">
-                <div class="fs-4 fw-bold">Total Sales</div>
+                <div class="fs-4 fw-bold mt-1">Total Sales</div>
                 <div class="p-2">
-                    <a class="btn btn-sm w-100 btn-outline-dark mb-2" href="{{ route('sales.record') }}">RM{{ number_format($total, 2) }}</a>
-                    <br>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="card">
-                <div class="fs-4 fw-bold">Recent Sales</div>
-                <div class="p-2">
-                    @foreach ($sales as $sale)
-                        <a class="btn btn-sm w-100 btn-outline-dark mb-2"
-                            href="{{ route('sales.record') }}">RM{{ $sale->totalSales }}</a>
-                        <br>
-                    @endforeach
-                </div>
-            </div>
-
-            <hr>
-            
-            <div class="card">
-                <div class="fs-4 fw-bold">Best Selling<h6> - by price</h6>
-                </div>
-                <div class="p-2">
-                    @foreach ($hotitems as $hotitem)
-                        <a class="btn btn-sm w-100 btn-outline-dark mb-2"
-                            href="{{ route('brands.show', [$hotitem->brand->id]) }}">{{ $hotitem->brand->name }} . {{ $hotitem->name }}</a>
-                        <br>
-                    @endforeach
+                    <div class="d-flex">
+                        <a class="btn btn-sm btn-outline-dark w-100 mb-2 disabled">RM{{ number_format($total, 2) }}</a>
+                        <div class="ps-1"></div>
+                        <a class="btn btn-sm btn-outline-success mb-2" href="{{ route('sales.record') }}">Sales</a>
+                    </div>
                 </div>
             </div>
 
@@ -132,6 +108,36 @@
                     @endforeach
                 </div>
             </div>
+
+            <hr>
+
+            <div class="card">
+                <div class="fs-4 fw-bold mt-1">Recent Sales</div>
+                <div class="p-2">
+                    @foreach ($sales as $sale)
+                        <a class="btn btn-sm w-100 btn-outline-dark mb-2"
+                            href="{{ route('sales.show', [$sale->id]) }}">RM{{ $sale->totalSales }}</a>
+                        <br>
+                    @endforeach
+                </div>
+            </div>
+
+            <hr>
+            
+            <div class="card">
+                <div class="fs-4 fw-bold mt-1">Best Selling<h6> - by price</h6>
+                </div>
+                <div class="p-2">
+                    @foreach ($hotitems as $hotitem)
+                        <a class="btn btn-sm w-100 btn-outline-dark mb-2"
+                            href="{{ route('brands.show', [$hotitem->brand->id]) }}">{{ $hotitem->name }}</a>
+                        <br>
+                    @endforeach
+                </div>
+            </div>
+
+            <hr>
+
         </div>
     </div>
 @endsection('content')

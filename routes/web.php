@@ -60,6 +60,7 @@ Route::get('/product/revmove/{id}', [ProductsController::class, 'subtractProduct
 Route::patch('/update-shopping-cart', [ProductsController::class, 'updateCart'])->name('update.sopping.cart');
 Route::delete('/delete-cart-product', [ProductsController::class, 'deleteProduct'])->name('delete.cart.product');
 Route::post('/sales.create', [ProductsController::class, 'addtoTotalSale'])->name('addtoTotalSale');
+Route::post('/calculate-payable-amount', [ProductsController::class, 'calculatePayableAmount'])->name('calculatePayableAmount');
 
 //Sales Routes
 Route::resource('/sales', SalesController::class);

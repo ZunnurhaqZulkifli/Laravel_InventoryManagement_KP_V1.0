@@ -14,7 +14,7 @@ class ProductsSeeder extends Seeder
     public function run()
     {
         Products::create([
-            'name' => 'Cola Small',
+            'name' => 'Coca Cola Bottle (small)',
             'brand_id' => 1,
             'category_id' => 1,
             'price' => 1.20,
@@ -24,7 +24,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Cola Tin',
+            'name' => 'Coca Cola (can)',
             'brand_id' => 1,
             'category_id' => 1,
             'price' => 2.00,
@@ -34,7 +34,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Coca Big-Bottle',
+            'name' => 'Coca Bottle (1.25l)',
             'brand_id' => 1,
             'category_id' => 1,
             'price' => 2.80,
@@ -44,7 +44,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Reduced',
+            'name' => '100 Plus Reduced Bottle (small)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 2.50,
@@ -54,7 +54,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Zero',
+            'name' => '100 Plus Zero Bottle (small)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 2.50,
@@ -64,7 +64,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Original',
+            'name' => '100 Plus Original Bottle (small)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 2.50,
@@ -74,7 +74,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Lime',
+            'name' => '100 Plus Lime Bottle (small)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 2.50,
@@ -84,7 +84,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Berry',
+            'name' => '100 Plus Berry Bottle (small)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 2.50,
@@ -94,7 +94,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Grape',
+            'name' => '100 Plus Grape Bottle (small)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 2.50,
@@ -104,7 +104,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Active',
+            'name' => '100 Plus Active Bottle (small)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 2.50,
@@ -114,7 +114,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Active',
+            'name' => '100 Plus Active Bottle (big)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 4.00,
@@ -124,7 +124,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Berry',
+            'name' => '100 Plus Berry Bottle (big)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 4.00,
@@ -134,7 +134,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Original',
+            'name' => '100 Plus Original Bottle (big)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 4.00,
@@ -144,7 +144,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Lime',
+            'name' => '100 Plus Lime Bottle (big)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 4.00,
@@ -154,7 +154,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Grape',
+            'name' => '100 Plus Grape Bottle (big)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 4.00,
@@ -164,7 +164,7 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Zero',
+            'name' => '100 Plus Zero Bottle (big)',
             'brand_id' => 8,
             'category_id' => 1,
             'price' => 4.00,
@@ -174,7 +174,40 @@ class ProductsSeeder extends Seeder
         ]);
 
         Products::create([
-            'name' => 'Root Beer',
+            'name' => 'Bundaberg (RootBeer)',
+            'flavour' => 'Root Beer',
+            'brand_id' => 11,
+            'category_id' => 1,
+            'price' => 6.00,
+            'variation_id' => 13,
+            'quantity' => 6,
+            'barcode' => 0000,
+        ]);
+
+        Products::create([
+            'name' => 'Bundaberg (GingerBeer)',
+            'flavour' => 'Root Beer',
+            'brand_id' => 11,
+            'category_id' => 1,
+            'price' => 6.00,
+            'variation_id' => 13,
+            'quantity' => 6,
+            'barcode' => 0000,
+        ]);
+
+        Products::create([
+            'name' => 'Bundaberg (Passionfruit)',
+            'flavour' => 'Root Beer',
+            'brand_id' => 11,
+            'category_id' => 1,
+            'price' => 6.00,
+            'variation_id' => 13,
+            'quantity' => 6,
+            'barcode' => 0000,
+        ]);
+
+        Products::create([
+            'name' => 'Bundaberg (AppleCider)',
             'flavour' => 'Root Beer',
             'brand_id' => 11,
             'category_id' => 1,

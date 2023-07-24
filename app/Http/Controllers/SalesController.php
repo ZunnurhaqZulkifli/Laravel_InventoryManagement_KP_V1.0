@@ -22,11 +22,13 @@ class SalesController extends Controller
         $sale = Sales::findOrFail($id);
         $items = explode( '|', $sale->items);
         $quantities = explode( ',', $sale->quantity);
+        $productItems = explode( ',', $sale->products_id);
 
         return view('sales.show', [
             'sale' => $sale,
             'items' => $items,
             'quantities' => $quantities,
+            'productItems' => $productItems,
         ]);
     }
 
@@ -42,7 +44,7 @@ class SalesController extends Controller
 
             $products = session()->get('cart');
 
-            $q0 = collect($products)->pluck('brand', 'name')->
+            $q0 = collect($products)->pluck('name')->
             implode(',', array_map(function ($item) {
                 return implode(',', $item);
             }, $products));
@@ -51,11 +53,19 @@ class SalesController extends Controller
             implode(',', array_map(function ($item) {
                 return implode(',', $item);
             }, $products));
-            
+
+            $q2 = collect($products)->pluck('id')->
+            implode(',', array_map(function ($item) {
+                return implode(',', $item);
+            }, $products));
+
+            // dd($q0);
+
             $sale = Sales::create([
                 'totalSales' => $request->input('totalPrice'),
                 'items' => $q0,
                 'quantity' => $q1,
+                'products_id' => $q2,
             ]);
 
             foreach ($cart as $key => $value) {

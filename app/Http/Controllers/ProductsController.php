@@ -201,7 +201,7 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function productCart()
+    public function productCart(Request $request)
     {
         $totalPrice = 0;
         $sale = Sales::all();
@@ -277,6 +277,16 @@ class ProductsController extends Controller
             }
             session()->flash('warning', 'Productremoved.');
         }
+    }
+
+    public function calculatePayableAmount(Request $request)
+    {
+        $cash = $request->input('cash') * 100;
+        $tp = $request->input('tp') * 100;
+        $tpa = max($cash - $tp, 0);
+        $totalPayableAmount = number_format($tpa / 100 - 0.20, 2);
+
+        return response()->json(['totalPayableAmount' => $totalPayableAmount]);
     }
 
 }

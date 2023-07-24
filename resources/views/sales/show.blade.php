@@ -4,7 +4,7 @@
     <div class="container">
 
         <div class="mt-4">
-            <div class="display-3">Sales</div>
+            <div class="display-3 fw-bold">Sales<a class="fw-light text-decoration-none text-dark">_{{ $sale->id }}</a></div>
         </div>
 
         <div class="card w-50">
@@ -20,6 +20,10 @@
 
                 @foreach ($quantities as $quantity)
                     X<a>{{ $quantity }}</a>
+                @endforeach
+
+                @foreach ($productItems as $pi)
+                    <a href="{{ route('products.show', [$pi]) }}">{{ $pi }}</a>
                 @endforeach)
 
                 <br>
