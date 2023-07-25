@@ -91,34 +91,36 @@ class SalesController extends Controller
         $products = Products::all();
         $total = Sales::all()->sum('totalSales');
         $SalesCountedYesterday = Sales::where('created_at', '<=', Carbon::now()
-            ->subHours(15)
-            ->toDateTimeString())->sum('totalSales');
+                ->subHours(24)
+                ->toDateTimeString())->sum('totalSales');
+
+        $SalesCountedToday = Sales::where('created_at', '>=', Carbon::now()
+                ->subHours(24)
+                ->toDateTimeString())->sum('totalSales');
+
+        $key = 1;
 
         // dd($SalesCountedYesterday);
 
-        return view('sales.record', compact('sales', 'products', 'total', 'SalesCountedYesterday'));
+        return view('sales.record', compact('sales', 'products', 'total','SalesCountedToday','SalesCountedYesterday', 'key'));
     }
 
     public function salesByDate()
     {
-        $sales = Sales::all();
-
-        $key = 1;
-
         // at the >= is less than %amount% of hours.
         //change to <= to get the more then %amount% of hours.
         //CHANGE TO 24 THIS 12AM!!
         $total = Sales::where('created_at', '<=', Carbon::now()
-        ->subHours(15)
-        ->toDateTimeString())->sum('totalSales');
+                ->subHours(15)
+                ->toDateTimeString())->sum('totalSales');
 
         $SalesCountedYesterday = Sales::where('created_at', '<=', Carbon::now()
-            ->subHours(15)
-            ->toDateTimeString())->get();
-        
+                ->subHours(15)
+                ->toDateTimeString())->get();
+        $key = 1;
         // dd($times);
 
-        return view('sales.byDate', compact('sales','SalesCountedYesterday', 'total', 'key'));
+        return view('sales.byDate', compact('SalesCountedYesterday', 'total', 'key'));
     }
 
 }

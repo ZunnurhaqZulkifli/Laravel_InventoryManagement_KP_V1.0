@@ -30,9 +30,7 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        $lowstocks = Products::where('quantity', '<=', '2')
-            ->get();
-
+        $lowstocks = Products::where('quantity', '<=', '2')->get();
         $total = Sales::all()->sum('totalSales');
 
         //Mainly for images Purposes
