@@ -72,8 +72,16 @@
                 <label class="mt-2">Quantity</label>
                 <div class="form-group-card">
                     <div class="p-2">
-                        <input type="number" name="quantity" class="form-control" placeholder="1"
+                        <input type="number" name="quantity" class="form-control" placeholder="{{ $product->quantity }}"
                             value="{{ old('quantity', $product->quantity ?? 1) }}">
+                    </div>
+                </div>
+
+                <label class="mt-2">On_Pressed</label>
+                <div class="form-group-card">
+                    <div class="p-2">
+                        <input type="number" name="on_pressed" class="form-control" placeholder="{{ $product->on_pressed }}"
+                            value="{{ old('on_pressed', $product->on_pressed ?? 0) }}">
                     </div>
                 </div>
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use App\Models\Sales;
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SalesController extends Controller
@@ -20,9 +22,9 @@ class SalesController extends Controller
     {
         // $products = Products::all();
         $sale = Sales::findOrFail($id);
-        $items = explode( '|', $sale->items);
-        $quantities = explode( ',', $sale->quantity);
-        $productItems = explode( ',', $sale->products_id);
+        $items = explode('|', $sale->items);
+        $quantities = explode(',', $sale->quantity);
+        $productItems = explode(',', $sale->products_id);
 
         return view('sales.show', [
             'sale' => $sale,
@@ -45,17 +47,17 @@ class SalesController extends Controller
             $products = session()->get('cart');
 
             $q0 = collect($products)->pluck('name')->
-            implode(',', array_map(function ($item) {
+                implode(',', array_map(function ($item) {
                 return implode(',', $item);
             }, $products));
 
             $q1 = collect($products)->pluck('quantity')->
-            implode(',', array_map(function ($item) {
+                implode(',', array_map(function ($item) {
                 return implode(',', $item);
             }, $products));
 
             $q2 = collect($products)->pluck('id')->
-            implode(',', array_map(function ($item) {
+                implode(',', array_map(function ($item) {
                 return implode(',', $item);
             }, $products));
 
@@ -73,20 +75,50 @@ class SalesController extends Controller
                 session()->put('cart', $cart);
             }
 
-            return redirect()->route('sales.record')->with('success', 'Sales Good!');
+            Toastr::info('Sales Good!!!', 'Sales Good!!!', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('sales.record');
 
         } else {
-            return view('cart')->with('error', 'Cart is empty!');
+            Toastr::error('Cart Is Empty!!!', 'Sales Not Good!!!', ["positionClass" => "toast-top-right"]);
+            return view('cart');
         }
 
     }
 
-    public function sales()
+    public function salesAll()
     {
         $sales = Sales::orderBy('created_at', 'desc')->get();
         $products = Products::all();
         $total = Sales::all()->sum('totalSales');
+        $SalesCountedYesterday = Sales::where('created_at', '<=', Carbon::now()
+            ->subHours(15)
+            ->toDateTimeString())->sum('totalSales');
 
-        return view('sales.record', compact('sales', 'products', 'total'));
+        // dd($SalesCountedYesterday);
+
+        return view('sales.record', compact('sales', 'products', 'total', 'SalesCountedYesterday'));
     }
+
+    public function salesByDate()
+    {
+        $sales = Sales::all();
+
+        $key = 1;
+
+        // at the >= is less than %amount% of hours.
+        //change to <= to get the more then %amount% of hours.
+        //CHANGE TO 24 THIS 12AM!!
+        $total = Sales::where('created_at', '<=', Carbon::now()
+        ->subHours(15)
+        ->toDateTimeString())->sum('totalSales');
+
+        $SalesCountedYesterday = Sales::where('created_at', '<=', Carbon::now()
+            ->subHours(15)
+            ->toDateTimeString())->get();
+        
+        // dd($times);
+
+        return view('sales.byDate', compact('sales','SalesCountedYesterday', 'total', 'key'));
+    }
+
 }

@@ -9,7 +9,7 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-    {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> --}}
+
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
@@ -79,13 +79,13 @@
                     <h5 class="offcanvas-title text-center" id="offcanvasScrollingLabel">Master Control</h5>
                     <hr>
                     <div class="d-flex justify-content-center">
-                        <a class="btn btn-outline-dark" href="{{ url()->previous() }}">
-                            <i class="fa-solid fa-chevron-left" style="color: #000000;"></i>BACK</a>
+
+                        <a class="btn btn-outline-dark" href="{{ url()->previous() }}">BACK</a>
 
                         <div class="ps-1"></div>
 
                         <a class="btn btn-outline-dark" href="{{ route('shopping.cart') }}">
-                            <i class="fa fa-shopping-cart" style="color: #6200ff"></i>CART</a>
+                            <i class="fa fa-shopping-cart" style="color: #6200ff"></i></a>
 
                         <div class="ps-1"></div>
 
@@ -180,6 +180,7 @@
 
         <div class="container">
             @include('flash-message')
+            {!! Toastr::message() !!}
             @yield('content')
         </div>
 

@@ -58,6 +58,7 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL'),
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -84,6 +85,8 @@ return [
     */
 
     'locale' => 'en',
+
+    'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +171,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
     ])->toArray(),
 
     /*

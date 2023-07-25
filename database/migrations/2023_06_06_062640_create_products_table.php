@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('variation_id')->references('id')->on('variations');
             $table->text('description')->nullable();
             $table->decimal("price", 6,2);
+            $table->integer('on_pressed')->nullable();
             $table->string('flavour')->nullable();
             $table->integer('quantity')->nullable();
             $table->string('barcode')->nullable();

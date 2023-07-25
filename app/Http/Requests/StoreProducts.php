@@ -28,6 +28,7 @@ class StoreProducts extends FormRequest
             'category_id' => 'required|exists:categories,id',
             'variation_id' => 'required|exists:variations,id',
             'brand_id' => 'required|exists:brands,id',
+            'on_pressed' => 'numeric|min:0|max:100',
             'thumbnail' => 'image|mimes:jpg,jpeg,png,gif,svg|max:2048|dimensions:max_height=1385, max_width=1421, min_height=693, min_width=711',
             'quantity' => 'numeric|min:1|max:100',
         ];

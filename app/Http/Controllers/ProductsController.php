@@ -9,6 +9,7 @@ use App\Models\Image;
 use App\Models\Products;
 use App\Models\Sales;
 use App\Models\Variation;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -134,7 +135,7 @@ class ProductsController extends Controller
         // dd($product);
 
         //this is the route rerouting
-        $request->session()->flash('status', 'Added a New Product!');
+        Toastr::success('Products Created Successfully', 'Product Created', ["positionClass" => "toast-top-right"]);
         return redirect()->route('products.create');
     }
 
@@ -160,8 +161,7 @@ class ProductsController extends Controller
         }
 
         $product->save();
-        $request->session()->flash('status', 'Product was Updated!');
-
+        Toastr::info('Products Successfully Updated', 'Products Updated', ["positionClass" => "toast-top-right"]);
         return redirect()->route('products.show', [$product->id]);
     }
 
@@ -183,7 +183,7 @@ class ProductsController extends Controller
         $product = Products::findOrFail($id);
         $product->delete();
 
-        session()->flash('status', 'The product is removed');
+        Toastr::danger('Products Successfully Deleted', 'Products Deleted!', ["positionClass" => "toast-top-right"]);
         return redirect()->route('products.index');
     }
 
@@ -220,6 +220,7 @@ class ProductsController extends Controller
             if (isset($cart[$id])) {
                 $cart[$id]['quantity']++;
             } else {
+                $product->increment('on_pressed');
                 $cart[$id] = [
                     "name" => $product->name,
                     "brand" => $product->brand->name,
@@ -228,12 +229,11 @@ class ProductsController extends Controller
                     "id" => $product->id,
                 ];
             }
-
             $product->decrement('quantity');
-            $request->session()->flash('success', 'Product added to cart');
+            Toastr::success('Items added sucessfully', 'Success', ["positionClass" => "toast-top-right"]);
 
         } else {
-            $request->session()->flash('error', 'Product does not exit');
+            Toastr::error('Item is not found', 'Error', ["positionClass" => "toast-top-right"]);
         }
 
         session()->put('cart', $cart);
@@ -243,18 +243,22 @@ class ProductsController extends Controller
     public function subtractProductstoCart($id)
     {
         $product = Products::findOrFail($id);
-
         $cart = session()->get('cart', []);
         if (isset($cart[$id])) {
             $cart[$id]['quantity']--;
             $product->increment('quantity');
+            
+            if($product->on_pressed > 0) {
+                $product->decrement('on_pressed');
+            }
 
             if ($cart[$id]['quantity'] == 0) {
                 unset($cart[$id]);
             }
         }
+        Toastr::warning('Items removed sucessfully', 'Items removed sucessfully', ["positionClass" => "toast-top-right"]);
         session()->put('cart', $cart);
-        return redirect()->back()->with('warning', 'Product has been removed from cart!');
+        return redirect()->back();
     }
 
     public function updateCart(Request $request)
@@ -263,7 +267,6 @@ class ProductsController extends Controller
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            session()->flash('success', 'Product added to cart.');
         }
     }
 
@@ -286,7 +289,9 @@ class ProductsController extends Controller
         $tpa = max($cash - $tp, 0);
         $totalPayableAmount = number_format($tpa / 100, 2);
 
-        return response()->json(['totalPayableAmount' => $totalPayableAmount]);
+        return response()->json([
+            'totalPayableAmount' => $totalPayableAmount,
+            
+        ]);
     }
-
 }

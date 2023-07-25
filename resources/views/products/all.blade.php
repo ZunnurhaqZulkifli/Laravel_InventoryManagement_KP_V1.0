@@ -78,7 +78,8 @@
                                             class="fa-solid fa-cart-plus" style="color: #ffffff;"></i></a>
                                     <br>
                                 @else
-                                    <a class="error text-decoration-none badge col-7 bg-danger rounded-pill"><i
+                                    <a href="{{ route('addproducts.to.cart', $product->id) }}"
+                                        class="text-decoration-none badge col-7 bg-danger rounded-pill"><i
                                             class="fa-solid fa-cart-plus" style="color: #ffffff;"></i></a>
                                     <br>
                                 @endif
@@ -91,7 +92,8 @@
 
         <div class="card mt-2 mb-4">
             <div class="">
-                <a href="{{ route('products.create') }}" class="btn btn-sm btn-outline-primary w-100">Create a new Product</a>
+                <a href="{{ route('products.create') }}" class="btn btn-sm btn-outline-primary w-100">Create a new
+                    Product</a>
             </div>
         </div>
     </div>

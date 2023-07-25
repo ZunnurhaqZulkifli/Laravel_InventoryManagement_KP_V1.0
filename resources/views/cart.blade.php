@@ -7,24 +7,26 @@
 
         <div class="card rounded-0">
             <div class="p-2">
-                <p class="text-danger text-center">
+                <div class="text-danger text-center">
                     **** Please Take Note ****
                     <br>
                     1. All items has to be "saled" out in order to make sure that item is not "magically" gone, 
                     especially if the session timed-out.
                     
                     <br>
-                    2. The use of customer return money is experimental, double check the price!.
+                    2. The use of customer "return cash" is experimental, double check the price!.
 
                     <br>
                     3. Make Sure all of the items is the right item, brand, price and more.
-                </p>
+                </div>
             </div>
         </div>
 
+        <hr>
+
         <div class="row">
             <div class="col-9">
-                <table id="cart" class="mt-4 table table-bordered">
+                <table id="cart" class="table table-bordered">
 
                     <thead>
                         <tr>
@@ -103,30 +105,28 @@
             </td>
             </tr>
             </tfoot>
-
-            <tr>
-                <td colspan="1" class="text-right">
-
-                </td>
-
-                <td colspan="2" class="">
-                    <div class="p-2 fw-bold">Item Amount = RM{{ number_format($totalPrice, 2) }}</div>
-                </td>
-
-                <td colspan="5" class="text-right">
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="1" class="text-right">
+    
+                    </td>
+    
+                    <td colspan="2" class="">
+                        <div class="p-2 fw-bold">Item Amount = RM{{ number_format($totalPrice, 2) }}</div>
+                    </td>
+    
+                    <td colspan="5" class="text-right">
+                    </td>
+                </tr>
             </table>
         </div>
 
-        <div class="col-3 mt-4">
+        <div class="col-3">
             <div class="card rounded-0">
                 <div class="p-2 text-center">
-                    <div class="display-6 ps-2">Return Back</div>
-                    <p class="ps-2">Please do take note, that this feature is experimental and not accurate</p>
-
+                    <div class="display-6 ps-2">Return Cash</div>
                     <div class="card">
                         <form id="cart-form">
+                            @csrf
                             <div class="p-2">
                                 <label>CASH GIVEN (RM)</label>
                                 <input type="number" name="cash" id="cash" value="0" class="form-control"
@@ -140,7 +140,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -201,7 +200,7 @@
                         cash: cash,
                     },
                     success: function(response) {
-                        $('#totalPayableAmount').text('Amount Return: ' + response
+                        $('#totalPayableAmount').text('Amount Return = RM' + response
                             .totalPayableAmount);
                     },
                 });

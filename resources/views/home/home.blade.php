@@ -4,7 +4,6 @@
     <div class="display-4">Inventory Management</div>
     <div class="row mt-4">
         <div class="col-9">
-
             <div class="card">
                 <div class="p-4">
                     <div class="fs-4 fw-bold mt-1 text-center">Find Products <span class="fs-6 fw-light">powered by ~z.z~</span>
@@ -22,7 +21,7 @@
                 </div>
             </div>
 
-            <hr>
+    <hr>
 
             <div class="card shadow-sm p-2 mb-2 bg-body-tertiary rounded">
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
@@ -46,7 +45,7 @@
                 </div>
             </div>
 
-            <hr>
+    <hr>
 
             <div class="card">
                 <div class="h4 text-center mt-2">Good Products</div>
@@ -76,17 +75,16 @@
                 </div>
             @endauth
 
-            <hr>
+    <hr>
 
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat expedita veritatis ducimus nisi quae odit,
                 sapiente maiores fugit, voluptate ipsum quia hic, dolorem in? Suscipit beatae autem eius iure voluptatibus.
             </p>
         </div>
 
-        <div class="col-3 text-center">
-            
+        <div class="col-3 text-center">        
             <div class="card">
-                <div class="fs-4 fw-bold mt-1">Total Sales</div>
+                <div class="fs-4 fw-bold mt-1">Total Sales<span class="fs-6 fw-light"> (Monthly)</span></div>
                 <div class="p-2">
                     <div class="d-flex">
                         <a class="btn btn-sm btn-outline-dark w-100 mb-2 disabled">RM{{ number_format($total, 2) }}</a>
@@ -110,6 +108,20 @@
             </div>
 
             <hr>
+            
+            <div class="card">
+                <div class="fs-4 fw-bold mt-1">Best Selling<h6> - by price</h6>
+                </div>
+                <div class="p-2">
+                    @foreach ($hotitems as $hotitem)
+                        <a class="btn btn-sm w-100 btn-outline-dark mb-2"
+                            href="{{ route('products.show', [$hotitem->id]) }}">{{ $hotitem->name }}</a>
+                        <br>
+                    @endforeach
+                </div>
+            </div>
+
+            <hr>
 
             <div class="card">
                 <div class="fs-4 fw-bold mt-1">Recent Sales</div>
@@ -121,21 +133,7 @@
                     @endforeach
                 </div>
             </div>
-
-            <hr>
             
-            <div class="card">
-                <div class="fs-4 fw-bold mt-1">Best Selling<h6> - by price</h6>
-                </div>
-                <div class="p-2">
-                    @foreach ($hotitems as $hotitem)
-                        <a class="btn btn-sm w-100 btn-outline-dark mb-2"
-                            href="{{ route('brands.show', [$hotitem->brand->id]) }}">{{ $hotitem->name }}</a>
-                        <br>
-                    @endforeach
-                </div>
-            </div>
-
             <hr>
 
         </div>

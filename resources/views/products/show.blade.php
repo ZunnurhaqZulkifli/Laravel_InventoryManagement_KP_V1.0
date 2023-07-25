@@ -31,6 +31,7 @@
                             <div class="mb-2">Price : RM {{ $products->price }}</div>
                             <div class="mb-2">Type : {{ $products->variation->name }}</div>
                             <div class="mb-2">Brand : {{ $products->brand->name }}</div>
+                            <div class="mb-2">Liked by : {{ $products->on_pressed }}</div>
 
                             @if ($products->quantity != null)
                                 <div class="mb-2">Stock Left : {{ $products->quantity }}</div>
