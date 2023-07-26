@@ -46,10 +46,11 @@
 
         <nav class="my-md-0 mr-md-3">
 
-            <a class="btn btn-outline-primary" href="{{ route('home') }}">Home</a>
-            <a class="btn btn-outline-primary" href="{{ route('products.all') }}">Products</a>
-            <a class="btn btn-outline-primary" href="{{ route('products.create') }}">Create</a>
-            <a class="btn btn-outline-primary" href="{{ route('categories.products') }}">Categories</a>
+            <a class="btn btn-outline-primary" href="{{ route('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+            <a class="btn btn-outline-primary" href="{{ route('products.all') }}"><i
+                    class="fa-solid fa-bag-shopping"></i> Products</a>
+            <a class="btn btn-outline-primary" href="{{ route('products.create') }}"><i class="fa-solid fa-barcode"></i>
+                Create</a>
             <a class="btn btn-outline-primary" href="{{ route('brands_all') }}">Brands</a>
 
             @guest
@@ -62,7 +63,8 @@
                 </a>
 
                 <a class="btn btn-outline-primary" href="{{ route('shopping.cart') }}">
-                    <i class="fa fa-shopping-cart"></i> <span class="badge text-bg-primary">{{ count((array) session('cart')) }}</span>
+                    <i class="fa fa-shopping-cart"></i> <span
+                        class="badge text-bg-primary">{{ count((array) session('cart')) }}</span>
                 </a>
             @endguest
         </nav>
@@ -86,6 +88,16 @@
 
                         <a class="btn btn-outline-dark" href="{{ route('shopping.cart') }}">
                             <i class="fa fa-shopping-cart" style="color: #6200ff"></i></a>
+
+                        <div class="ps-1"></div>
+
+                        <a href="{{ route('sales.all') }}" class="btn btn-outline-dark"><i
+                                class="fa-solid fa-cash-register"></i></a>
+
+                        <div class="ps-1"></div>
+
+                        <a href="{{ route('products.stats') }}" class="btn btn-outline-dark"><i
+                                class="fa-solid fa-chart-line"></i></a>
 
                         <div class="ps-1"></div>
 
@@ -115,23 +127,34 @@
 
             <hr>
 
-            <div class="card mt-2">
-                <div class="p-2 text-center">
+            <div class="card">
+                <div class="p-1 text-center">
                     <div class="fs-5">Product's Menu</div>
-                    <hr>
-                    <a class="fs-7 btn btn-sm btn-outline-dark w-100" href="{{ route('products.all') }}">All
-                        Products</a>
-                    <hr>
-                    <a class="fs-7 btn btn-sm btn-outline-dark w-100"
-                        href="{{ route('categories.products') }}">Products by Categories</a>
-                    <hr>
-                    <a class="fs-7 btn btn-sm btn-outline-dark w-100" href="{{ route('brands_all') }}">Products by
-                        Brands</a>
-                    <hr>
-                    <a class="fs-7 btn btn-sm btn-outline-dark w-100"
-                        href="{{ route('products.index') }}">Categories</a>
-                    <hr>
+                    <div class="justify-content-center">
+                        <div class="d-flex p-2 row row-cols-4 row-cols-lg-4 g-1">
 
+                            <div class="col">
+                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('products.all') }}"><i
+                                        class="fa-solid fa-bag-shopping"></i><br>Products</a>
+                            </div>
+
+                            <div class="col">
+                                <a class="w-100 btn btn-sm btn-outline-dark"
+                                    href="{{ route('categories.products') }}"><i
+                                        class="fa-solid fa-bag-shopping"></i><br>Category</a>
+                            </div>
+
+                            <div class="col">
+                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('brands_all') }}"><i
+                                        class="fa-solid fa-bag-shopping"></i><br>Brands</a>
+                            </div>
+
+                            <div class="col">
+                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('products.index') }}"><i
+                                        class="fa-solid fa-bag-shopping"></i><br>Index</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="p-2 text-center">
@@ -145,22 +168,23 @@
                 <div class="p-2 text-center">
                     <div class="fs-5">Admin Pannel</div>
                     <hr>
-                    <a class="fs-7 btn btn-sm btn-outline-dark w-100" href="{{ route('brands.create') }}"> Add New
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('brands.create') }}"> Add New
                         Brands </a>
                     <hr>
-                    <a class="fs-7 btn btn-sm btn-outline-dark w-100" href="{{ route('categories.create') }}"> Add
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('categories.create') }}"> Add
                         New Category </a>
                     <hr>
-                    <a class="fs-7 btn btn-sm btn-outline-dark w-100" href="{{ route('variations.create') }}"> Add
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('variations.create') }}"> Add
                         New Variaiton </a>
                     <hr>
-                    <a class="fs-7 btn btn-sm btn-outline-dark w-100" href="{{ route('gallery.all') }}"> Images </a>
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('gallery.all') }}"><i
+                            class="fa-regular fa-images"></i> Images</a>
                     <hr>
 
-                    <a class="fs-7 btn btn-sm btn-outline-dark w-100" href="{{ route('products.stats') }}">Product
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('products.stats') }}">Product
                         Stats</a>
                     <hr>
-                    <a class="fs-7 btn btn-sm btn-outline-dark w-100" href="{{ route('sales.record') }}">Sales</a>
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('sales.all') }}">Sales</a>
 
                 </div>
 
@@ -187,35 +211,6 @@
     </div>
 
     @yield('scripts')
-
-    <script type="text/javascript">
-        $(".success").click(function() {
-            toastr.success('Item added to cart', 'Success Alert', {
-                timeOut: 5000
-            })
-        });
-
-
-        $(".error").click(function() {
-            toastr.error('Error', 'Item is not available', {
-                timeOut: 5000
-            })
-        });
-
-
-        $(".info").click(function() {
-            toastr.info('It is for your kind information', 'Information', {
-                timeOut: 5000
-            })
-        });
-
-
-        $(".warning").click(function() {
-            toastr.warning('It is for your kind warning', 'Warning', {
-                timeOut: 5000
-            })
-        });
-    </script>
 
     <script src="{{ mix('js/app.js') }}"></script>
 </body>

@@ -34,6 +34,15 @@ class SalesController extends Controller
         ]);
     }
 
+    public function destroy($id)
+    {
+        $sales = Sales::findOrFail($id);
+        $sales->delete();
+
+        Toastr::warning('Sales Is Deleted!!!', 'Sales Deleted!!!', ["positionClass" => "toast-top-right"]);
+        return view('sales.all');
+    }
+
     public function addtoTotalSale(Request $request)
     {
 
@@ -76,7 +85,7 @@ class SalesController extends Controller
             }
 
             Toastr::info('Sales Good!!!', 'Sales Good!!!', ["positionClass" => "toast-top-right"]);
-            return redirect()->route('sales.record');
+            return redirect()->route('sales.all');
 
         } else {
             Toastr::error('Cart Is Empty!!!', 'Sales Not Good!!!', ["positionClass" => "toast-top-right"]);
@@ -87,40 +96,45 @@ class SalesController extends Controller
 
     public function salesAll()
     {
-        $sales = Sales::orderBy('created_at', 'desc')->get();
+        $allSales = Sales::orderBy('created_at', 'desc')->get();
         $products = Products::all();
-        $total = Sales::all()->sum('totalSales');
-        $SalesCountedYesterday = Sales::where('created_at', '<=', Carbon::now()
-                ->subHours(24)
+        $allSalesTotal = Sales::all()->sum('totalSales');
+
+        $totalSalesYesterday = Sales::whereDate('created_at', Carbon::yesterday()
                 ->toDateTimeString())->sum('totalSales');
 
-        $SalesCountedToday = Sales::where('created_at', '>=', Carbon::now()
-                ->subHours(24)
+        $totalSalesToday = Sales::whereDate('created_at', Carbon::today()
                 ->toDateTimeString())->sum('totalSales');
 
         $key = 1;
 
-        // dd($SalesCountedYesterday);
+        // dd($salesCountedToday);
 
-        return view('sales.record', compact('sales', 'products', 'total','SalesCountedToday','SalesCountedYesterday', 'key'));
+        return view('sales.all', compact('allSales', 'products', 'allSalesTotal', 'totalSalesToday', 'totalSalesYesterday', 'key', 'totalSalesToday'));
     }
 
-    public function salesByDate()
+    public function salesYesterday()
     {
-        // at the >= is less than %amount% of hours.
-        //change to <= to get the more then %amount% of hours.
-        //CHANGE TO 24 THIS 12AM!!
-        $total = Sales::where('created_at', '<=', Carbon::now()
-                ->subHours(15)
+        $totalSalesYesterday = Sales::whereDate('created_at', Carbon::yesterday()
                 ->toDateTimeString())->sum('totalSales');
 
-        $SalesCountedYesterday = Sales::where('created_at', '<=', Carbon::now()
-                ->subHours(15)
+        $salesYesterday = Sales::whereDate('created_at', Carbon::yesterday()
                 ->toDateTimeString())->get();
         $key = 1;
-        // dd($times);
 
-        return view('sales.byDate', compact('SalesCountedYesterday', 'total', 'key'));
+        return view('sales.yesterday', compact('salesYesterday', 'totalSalesYesterday', 'key'));
+    }
+
+    public function salesToday()
+    {
+        $totalSalesToday = Sales::whereDate('created_at', Carbon::today()
+                ->toDateTimeString())->sum('totalSales');
+
+        $salesToday = Sales::whereDate('created_at',  Carbon::today()
+                ->toDateTimeString())->get();
+        $key = 1;
+
+        return view('sales.today', compact('salesToday', 'totalSalesToday', 'key'));
     }
 
 }

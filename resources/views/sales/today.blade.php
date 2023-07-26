@@ -5,9 +5,9 @@
         <div class="p-2">
             
             <div class="row justify-content-center">
-                <div class="fw-bold display-6 mt-2 mb-2">Total Sales<span> Yesterday</span></div>
+                <div class="fw-bold display-6 mt-2 mb-2">Total Sales<span class="fw-light h4"> (Today)</span></div>
                 <div class="card">
-                    <div class="col-9">
+                    <div class="col-12">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -17,7 +17,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                @foreach ($SalesCountedYesterday as $sale)
+                                @foreach ($salesToday as $sale)
                                     <tr>
                                         <td>{{ $key++ }}</td>
                                         <td>
@@ -37,14 +37,14 @@
                                     <td></td>
                                     <td></td>
                                     <td class="">
-                                        <div class="fw-bold">TOTAL SALE = RM {{ number_format($total, 2) }}</div>
+                                        <div class="fw-bold">TOTAL SALE = RM {{ number_format($totalSalesToday, 2) }}</div>
                                     </td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
-                {{-- <a class="w-100 btn btn-sm btn-outline-success mt-2" href="{{ route('sales.record') }}">Go Total</a> --}}
+                <a class="w-100 btn btn-sm btn-outline-success mt-2" href="{{ route('sales.all') }}">Total Sales</a>
             </div>
         </div>
     </div>

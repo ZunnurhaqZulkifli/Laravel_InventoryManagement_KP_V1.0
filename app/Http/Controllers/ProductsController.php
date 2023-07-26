@@ -35,7 +35,7 @@ class ProductsController extends Controller
     {
         $products = Products::with('category', 'brand', 'variation')->orderBy('price', 'desc')->get();
         // dd($products);
-        return view('products.categories', [
+        return view('products.index', [
             'products' => $products,
             'categories' => Category::with('products')->orderBy('created_at', 'asc')->get(),
         ]);

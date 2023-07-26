@@ -89,7 +89,7 @@
                     <div class="d-flex">
                         <a class="btn btn-sm btn-outline-dark w-100 mb-2 disabled">RM{{ number_format($total, 2) }}</a>
                         <div class="ps-1"></div>
-                        <a class="btn btn-sm btn-outline-success mb-2" href="{{ route('sales.record') }}">Sales</a>
+                        <a class="btn btn-sm btn-outline-success mb-2" href="{{ route('sales.all') }}">Sales</a>
                     </div>
                 </div>
             </div>

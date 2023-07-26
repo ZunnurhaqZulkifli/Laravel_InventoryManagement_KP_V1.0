@@ -4,16 +4,17 @@
     <div class="container">
 
         <div class="mt-4">
-            <div class="display-3 fw-bold">Sales<a class="fw-light text-decoration-none text-dark">_{{ $sale->id }}</a></div>
+            <div class="display-3 fw-bold">Sales<a class="fw-light text-decoration-none text-dark">_{{ $sale->id }}</a>
+            </div>
         </div>
 
         <div class="card w-50">
             <div class="p-4">
-                
-                <a class="text-decoration-none text-dark" >Recipt ID_{{ $sale->id }} {{ $sale->created_at }}</a>
-                <br>
+
+                <a class="text-decoration-none text-dark">Recipt ID : {{ $sale->id }}_{{ $sale->created_at }}</a>
+            <br>
                 <a>Items Sold</a>
-                <br>
+            <br>
                 (@foreach ($items as $item)
                     <a>{{ $item }}</a>
                 @endforeach
@@ -23,11 +24,11 @@
                 @endforeach
 
                 @foreach ($productItems as $pi)
-                    <a href="{{ route('products.show', [$pi]) }}">{{ $pi }}</a>
+                    <a href="{{ route('products.show', [$pi]) }}">Product_{{ $pi }}</a>
                 @endforeach)
 
                 <br>
-                
+
                 <hr>
 
                 <div class="card">

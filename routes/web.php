@@ -65,8 +65,9 @@ Route::post('/calculate-payable-amount', [ProductsController::class, 'calculateP
 //Sales Routes
 Route::resource('/sales', SalesController::class);
 Route::post('/sales/add', [SalesController::class, 'addtoTotalSale'])->name('sales.add');
-Route::get('/sales.byDate', [SalesController::class, 'salesByDate'])->name('sales.byDate');
-Route::get('/sales.record', [SalesController::class, 'salesAll'])->name('sales.record');
+Route::get('/sales.yesterday', [SalesController::class, 'salesYesterday'])->name('sales.yesterday');
+Route::get('/sales.today', [SalesController::class, 'salesToday'])->name('sales.today');
+Route::get('/sales.all', [SalesController::class, 'salesAll'])->name('sales.all');
 Route::get('/sales.store', [SalesController::class, 'store'])->name('sales.store');
 
 //Gallery Controller
