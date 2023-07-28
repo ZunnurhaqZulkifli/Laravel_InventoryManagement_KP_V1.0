@@ -11,6 +11,7 @@ use App\Models\Sales;
 use App\Models\Variation;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
@@ -19,7 +20,7 @@ class ProductsController extends Controller
     public function __construct()
     {
         $this->middleware('auth')
-            ->only(['show', 'create', 'store', 'edit', 'update', 'destroy', 'all', 'categories', 'productCart']);
+            ->only(['show', 'create', 'store', 'edit', 'update', 'destroy', 'all', 'categories', 'productCart', 'stats']);
     }
 
     public function hotItem()
@@ -60,11 +61,6 @@ class ProductsController extends Controller
         $variations = Variation::all();
 
         return view('products.edit', compact('categories', 'product', 'brands', 'variations'));
-    }
-
-    public function home()
-    {
-        return view('products.home');
     }
 
     public function create()
@@ -201,7 +197,7 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function productCart(Request $request)
+    public function cart(Request $request)
     {
         $totalPrice = 0;
         $sale = Sales::all();

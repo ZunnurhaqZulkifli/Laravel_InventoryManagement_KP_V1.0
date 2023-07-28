@@ -17,7 +17,14 @@ class UserSeeder extends Seeder
             'name' => 'H4CK3RZzZ',
             'password' => 'secret123',
             'email' => 'zunnurclash24@gmail.com',
-            // 'is_admin' => 'yes',
+            'is_admin' => true,
+        ]);
+
+        User::create([
+            'name' => 'John Doe',
+            'password' => 'secret123',
+            'email' => 'john@gmail.com',
+            'is_admin' => false,
         ]);
     }
 }

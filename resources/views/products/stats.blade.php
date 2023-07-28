@@ -31,19 +31,25 @@
                                             <td href="" class="">{{ $product->brand->name }}</td>
                                             <td href="" class="">{{ $product->price }}</td>
                                             @if ($product->quantity < 3)
-                                                <td href="" class="ps-3 bg-danger text-light">{{ $product->quantity }}</td>
+                                                <td href="" class="ps-3 bg-danger text-light">
+                                                    {{ $product->quantity }}</td>
                                             @else
-                                                <td href="" class="ps-3">{{ $product->quantity }}</td>    
+                                                <td href="" class="ps-3">{{ $product->quantity }}</td>
                                             @endif
+                                            
+                                            @can('update', $product)
                                             <td><a href="{{ route('products.edit', [$product->id]) }}"
                                                     class="btn btn-sm badge bg-danger rounded-pill">Edit</a></td>
+                                                @else
+                                                <td><a onclick="return confirm('Get Admin!')"
+                                                    class="btn btn-sm badge bg-danger rounded-pill">Get Admin</a></td>
+                                            @endcan('update')
                                         </tr>
                                     @else
-
                                     @endif
                                 @empty
                                     <tr>
-                                        <a class="btn btn-sm badge bg-primary w-100 rounded-pill">Add a product</a>    
+                                        <a class="btn btn-sm badge bg-primary w-100 rounded-pill">Add a product</a>
                                     </tr>
                                 @endforelse
                             </tbody>

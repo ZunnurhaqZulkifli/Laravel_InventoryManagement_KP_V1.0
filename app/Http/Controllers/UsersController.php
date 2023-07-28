@@ -11,7 +11,12 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function __construct() {
+        $this->middleware('auth')->only(['show']);
+    }
+    
+    
+     public function index()
     {
         //
     }
@@ -21,10 +26,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // $users = User::all();
-        return view('users.create');
+        //
     }
-
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -36,9 +40,10 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.show', compact('user'));
     }
 
     /**

@@ -38,7 +38,7 @@
                                     <center><a>{{ $image->name }}</a></center>
                                 </div>
                             @else
-                                {{-- <a class="btn btn-sm" href="{{ route('gallery.create') }}">Add Images</a> --}}
+                                
                             @endif
                         @endforeach
                     </div>

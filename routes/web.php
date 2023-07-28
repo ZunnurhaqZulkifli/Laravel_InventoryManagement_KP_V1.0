@@ -31,16 +31,16 @@ Route::get('/home.image.store', [HomeController::class,'store'])->name('home.ima
 Route::get('/home.image.upload', [HomeController::class,'homeImageUpload'])->name('home.image.upload');
 
 // Users
-Route::resource('/user', UsersController::class);
+Route::resource('/users', UsersController::class);
 
 // Products
 Route::resource('/products' , ProductsController::class);
 Route::get('/products.all', [ProductsController::class, 'all'])->name('products.all');
 Route::get('/best.seller', [ProductsController::class, 'hotItem'])->name('best.seller');
+Route::get('/products.stats', [ProductsController::class, 'stats'])->name('products.stats');
 Route::get('/products.brands', [ProductsController::class, 'brands'])->name('products.brands');
 Route::get('/products.variations', [ProductsController::class, 'variations'])->name('products.variations');
-Route::get('/products.stats', [ProductsController::class, 'stats'])->name('products.stats');
-    
+
 // Brands
 Route::resource('/brands', BrandsController::class);
 Route::get('/brands.all', [BrandsController::class, 'allBrands'])->name('brands_all');
@@ -54,25 +54,27 @@ Route::resource('/variations', VariationsController::class);
 Route::get('variations.all', [VariationsController::class, 'all'])->name('variations.all');
 
 // Cart Routes
-Route::get('/shopping-cart', [ProductsController::class, 'productCart'])->name('shopping.cart');
-Route::get('/product/{id}', [ProductsController::class, 'addProductstoCart'])->name('addproducts.to.cart');
-Route::get('/product/revmove/{id}', [ProductsController::class, 'subtractProductstoCart'])->name('remove.items');
-Route::patch('/update-shopping-cart', [ProductsController::class, 'updateCart'])->name('update.sopping.cart');
-Route::delete('/delete-cart-product', [ProductsController::class, 'deleteProduct'])->name('delete.cart.product');
+Route::get('/cart', [ProductsController::class, 'cart'])->name('shopping.cart');
 Route::post('/sales.create', [ProductsController::class, 'addtoTotalSale'])->name('addtoTotalSale');
+Route::get('/product/{id}', [ProductsController::class, 'addProductstoCart'])->name('addproducts.to.cart');
+Route::patch('/update-shopping-cart', [ProductsController::class, 'updateCart'])->name('update.sopping.cart');
+Route::get('/product/remove/{id}', [ProductsController::class, 'subtractProductstoCart'])->name('remove.items');
+Route::delete('/delete-cart-product', [ProductsController::class, 'deleteProduct'])->name('delete.cart.product');
 Route::post('/calculate-payable-amount', [ProductsController::class, 'calculatePayableAmount'])->name('calculatePayableAmount');
 
 //Sales Routes
 Route::resource('/sales', SalesController::class);
-Route::post('/sales/add', [SalesController::class, 'addtoTotalSale'])->name('sales.add');
-Route::get('/sales.yesterday', [SalesController::class, 'salesYesterday'])->name('sales.yesterday');
-Route::get('/sales.today', [SalesController::class, 'salesToday'])->name('sales.today');
 Route::get('/sales.all', [SalesController::class, 'salesAll'])->name('sales.all');
 Route::get('/sales.store', [SalesController::class, 'store'])->name('sales.store');
+Route::get('/sales.today', [SalesController::class, 'salesToday'])->name('sales.today');
+Route::post('/sales/add', [SalesController::class, 'addtoTotalSale'])->name('sales.add');
+Route::get('/sales.yesterday', [SalesController::class, 'salesYesterday'])->name('sales.yesterday');
 
 //Gallery Controller
-Route::resource('/gallery', GalleryController::class);
-Route::get('/gallery', [GalleryController::class, 'all'])->name('gallery.all');
+Route::resource('gallery', GalleryController::class);
+Route::get('/gallery.all', [GalleryController::class, 'all'])->name('gallery.all');
+
+//Admins Only
 
 Auth::routes();
 

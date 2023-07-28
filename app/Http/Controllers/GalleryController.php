@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Image;
 use App\Models\Products;
-use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class GalleryController extends Controller
 {
@@ -40,9 +40,8 @@ class GalleryController extends Controller
                 Image::create(['path' => $path])
             );
         }
-        // dd($gallery);
 
-        $request->session()->flash('status', 'Added a new image!');
+        Toastr::success('Image Added Successfully', 'Image Added', ["positionClass" => "toast-top-right"]);
         return redirect()->route('gallery.all');
     }
 
@@ -50,6 +49,20 @@ class GalleryController extends Controller
     {
         $gallery = Gallery::all();
         return view('gallery.create', compact('gallery'));
+    }
+
+    public function destroy($id)
+    {
+        $gallery = Gallery::findOrFail($id);
+        $gallery->delete();
+
+        Toastr::error('Image Deleted Successfully', 'Image Deleted!', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('gallery.all', compact('gallery'));
+    }
+
+    public function show($id)
+    {
+        //
     }
 
 }

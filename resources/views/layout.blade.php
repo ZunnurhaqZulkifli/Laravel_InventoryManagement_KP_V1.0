@@ -40,7 +40,7 @@
 
         <div class="d-flex">
             <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"
-                class="btn btn-outline-dark"><i class="fa-solid fa-bars" style="color: #000000;"></i></a>
+                class="btn btn-outline-primary"><i class="fa-solid fa-bars"></i></a>
             <a class="h3 ps-2 my-1 mr-md-auto text-decoration-none">Inventory Management</a>
         </div>
 
@@ -51,15 +51,16 @@
                     class="fa-solid fa-bag-shopping"></i> Products</a>
             <a class="btn btn-outline-primary" href="{{ route('products.create') }}"><i class="fa-solid fa-barcode"></i>
                 Create</a>
-            <a class="btn btn-outline-primary" href="{{ route('brands_all') }}">Brands</a>
+            <a class="btn btn-outline-primary" href="{{ route('brands_all') }}"><i class="fa-brands fa-apple fa-lg"></i>
+                Brands</a>
 
             @guest
                 @if (Route::has('login'))
                     <a class="btn btn btn-outline-dark" href="{{ route('login') }}">{{ __('Login') }}</a>
                 @endif
             @else
-                <a class="btn btn btn-outline-primary" href="#" role="button" style="color: #000000">
-                    {{ Auth::user()->name }}
+                <a class="btn btn btn-outline-primary" href="{{ route('users.show', [ Auth::user()->id]) }}" role="button">
+                    <i class="fa-regular fa-user"></i> {{ Auth::user()->name }}
                 </a>
 
                 <a class="btn btn-outline-primary" href="{{ route('shopping.cart') }}">
@@ -82,39 +83,40 @@
                     <hr>
                     <div class="d-flex justify-content-center">
 
-                        <a class="btn btn-outline-dark" href="{{ url()->previous() }}">BACK</a>
-
-                        <div class="ps-1"></div>
-
                         <a class="btn btn-outline-dark" href="{{ route('shopping.cart') }}">
-                            <i class="fa fa-shopping-cart" style="color: #6200ff"></i></a>
+                            <i class="fa fa-shopping-cart" style="color: #ff4800"></i></a>
 
                         <div class="ps-1"></div>
 
                         <a href="{{ route('sales.all') }}" class="btn btn-outline-dark"><i
-                                class="fa-solid fa-cash-register"></i></a>
+                                class="fa-solid fa-cash-register" style="color: #ff4800"></i></a>
 
                         <div class="ps-1"></div>
 
                         <a href="{{ route('products.stats') }}" class="btn btn-outline-dark"><i
-                                class="fa-solid fa-chart-line"></i></a>
+                                class="fa-solid fa-chart-line" style="color: #ff4800"></i></a>
 
                         <div class="ps-1"></div>
 
                         @guest
                             @if (Route::has('login'))
                                 <a class="p-2 btn btn-sm btn-outline-dark" href="{{ route('login') }}"><i
-                                        class="fab fa-laravel" style="color: #6200ff;"></i> LOGIN</a>
+                                        class="fab fa-laravel" style="color: #ff4800"></i> LOGIN</a>
                             @endif
                         @else
-                            <a class="p-2 btn btn btn-outline-dark" href="{{ route('logout') }}"
+                            @csrf
+                            <a class="p-2 btn btn btn-outline-dark" href="{{ route('logout') }}" style="color: #ff4800"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                                    class="fab fa-laravel" style="color: #6200ff;"></i> LOGOUT</a>
+                                    class="fab fa-laravel" style="color: #ff4800"></i> LOGOUT</a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         @endguest
+
+                        <div class="ps-1"></div>
+                        <a class="btn btn-outline-dark" href="{{ url()->previous() }}" style="color: #ff4800">BACK</a>
+                        
                     </div>
 
                     <div class="form-check form-switch mt-2">
@@ -140,18 +142,18 @@
 
                             <div class="col">
                                 <a class="w-100 btn btn-sm btn-outline-dark"
-                                    href="{{ route('categories.products') }}"><i
-                                        class="fa-solid fa-bag-shopping"></i><br>Category</a>
+                                    href="{{ route('categories.products') }}">
+                                    <i class="fa-solid fa-filter"></i><br>Category</a>
                             </div>
 
                             <div class="col">
-                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('brands_all') }}"><i
-                                        class="fa-solid fa-bag-shopping"></i><br>Brands</a>
+                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('brands_all') }}">
+                                    <i class="fa-brands fa-apple fa-lg"></i><br>Brands</a>
                             </div>
 
                             <div class="col">
-                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('products.index') }}"><i
-                                        class="fa-solid fa-bag-shopping"></i><br>Index</a>
+                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('products.index') }}">
+                                    <i class="fa-solid fa-list-ul"></i><br>Index</a>
                             </div>
                         </div>
                     </div>

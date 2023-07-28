@@ -81,7 +81,7 @@
                 <div class="form-group-card">
                     <div class="p-2">
                         <input type="number" name="on_pressed" class="form-control" placeholder="{{ $product->on_pressed }}"
-                            value="{{ old('on_pressed', $product->on_pressed ?? 0) }}">
+                            value="{{ old('on_pressed', $product->on_pressed ?? 0) }}" disabled>
                     </div>
                 </div>
 
