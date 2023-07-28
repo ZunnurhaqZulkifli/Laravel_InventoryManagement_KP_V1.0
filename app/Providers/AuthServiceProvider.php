@@ -28,19 +28,19 @@ class AuthServiceProvider extends ServiceProvider
             return $user->is_admin;
         });
 
-        Gate::define('user.controllers', function ($user) {
-            return $user->is_admin;
-        });
-
         Gate::define('products.edit', function ($user) {
             return $user->is_admin;
         });
 
-        Gate::define('gallery', function ($user) {
+        Gate::define('variations.create', function ($user) {
             return $user->is_admin;
         });
 
-        Gate::define('sale', function ($user) {
+        Gate::define('brands.create', function ($user) {
+            return $user->is_admin;
+        });
+
+        Gate::define('categories.create', function ($user) {
             return $user->is_admin;
         });
 

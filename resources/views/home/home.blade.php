@@ -57,12 +57,12 @@
                                         class="card img-fluid object-fit-contain" src="{{ $hotimage->image->url() }}"
                                         style="width:15em; height:7em;">
                                 </a>
-                                <a class="text-dark text-decoration-none">({{ $hotimage->brand->name}}-{{ $hotimage->name }})</a>
+                                <a class="text-dark text-decoration-none">({{ $hotimage->name }})</a>
                             </div>
                         @else
                             <div class="btn btn-sm btn-outline-dark">
                                 <a class="text-dark"
-                                    href="{{ route('products.edit', [$hotimage->id]) }}">{{ $hotimage->name }}</a>
+                                    href="{{ route('products.show', [$hotimage->id]) }}">{{ $hotimage->name }}</a>
                             </div>
                         @endif
                     @endforeach
@@ -101,7 +101,7 @@
                     <div class="fs-4 fw-bold">Low Stock</div>
                     @foreach ($lowstocks as $lowstock)
                         <a class="btn btn-sm w-100 btn-outline-danger mb-2"
-                            href="{{ route('products.stats') }}">{{ $lowstock->brand->name }} . {{ $lowstock->name }}</a>
+                            href="{{ route('products.stats') }}">{{ $lowstock->name }}</a>
                         <br>
                     @endforeach
                 </div>

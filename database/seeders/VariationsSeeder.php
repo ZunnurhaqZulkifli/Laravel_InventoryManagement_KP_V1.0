@@ -8,11 +8,16 @@ use Illuminate\Database\Seeder;
 
 class VariationsSeeder extends Seeder
 {
+
+
     /**
      * Run the database seeds.
      */
     public function run()
-    {
+    {   
+
+        //Breaking Changes, want to add a new variation?? make sure to update products seeder.
+        
         Variation::create([
             'name' => 'Can',
         ]);
@@ -63,6 +68,10 @@ class VariationsSeeder extends Seeder
 
         Variation::create([
             'name' => '375ml Glass Bottle',
+        ]);
+
+        Variation::create([
+            'name' => '1 Pcs',
         ]);
     }
 }

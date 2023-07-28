@@ -24,18 +24,9 @@
                         <div class="form-group mt-2">
                             <label for="category_id">Category</label>
                             <select class="form-control" name="category_id" id="category_id">
+                                <option>Default</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group mt-2">
-                            <label for="variation_id">Variations</label>
-                            <select class="form-control" name="variation_id" id="variation_id">
-                                <option>Default</option>
-                                @foreach($variations as $variation)
-                                    <option value="{{ $variation->id }}">{{ $variation->name }}</option>
                                 @endforeach
                             </select>
                         </div>

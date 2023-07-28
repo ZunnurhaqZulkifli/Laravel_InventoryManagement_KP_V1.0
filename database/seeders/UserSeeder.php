@@ -23,7 +23,21 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'John Doe',
             'password' => 'secret123',
-            'email' => 'john@gmail.com',
+            'email' => 'john@mail.com',
+            'is_admin' => false,
+        ]);
+
+        User::create([
+            'name' => 'Promoter 1',
+            'password' => 'secret123',
+            'email' => 'promoter1@mail.com',
+            'is_admin' => false,
+        ]);
+
+        User::create([
+            'name' => 'Promoter 2',
+            'password' => 'secret123',
+            'email' => 'promoter2@mail.com',
             'is_admin' => false,
         ]);
     }

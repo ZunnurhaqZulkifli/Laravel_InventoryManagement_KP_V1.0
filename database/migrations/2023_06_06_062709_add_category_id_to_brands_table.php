@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::table('brands', function (Blueprint $table) {
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->unsignedBigInteger('variation_id')->nullable();
-            $table->foreign('variation_id')->references('id')->on('variations')->onDelete('cascade');
         });
     }
 
@@ -27,8 +25,6 @@ return new class extends Migration
         Schema::table('brands', function (Blueprint $table) {
             $table->dropForeign(['category_id']);
             $table->dropColumn('category_id');
-            $table->dropForeign(['variation_id']);
-            $table->dropColumn(['variation_id']);
         });
     }
 };

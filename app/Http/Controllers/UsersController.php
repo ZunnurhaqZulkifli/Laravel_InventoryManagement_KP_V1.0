@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStore;
+use App\Models\Sales;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -42,8 +43,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        return view('users.show', compact('user'));
+        $user = User::find($id);
+        $soldItems = Sales::all()->where('user_id', $id);
+        return view('users.show', compact('user', 'soldItems'));
     }
 
     /**

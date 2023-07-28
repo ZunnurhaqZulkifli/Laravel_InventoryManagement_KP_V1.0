@@ -7,15 +7,17 @@ use App\Models\Sales;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SalesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function __invoke()
+    public function __construct()
     {
-        //
+        $this->middleware('auth')
+            ->only(['show', 'destroy', 'salesAll', 'salesYesterday', 'salesToday']);
     }
 
     public function show($id)
@@ -25,10 +27,12 @@ class SalesController extends Controller
         $items = explode('|', $sale->items);
         $quantities = explode(',', $sale->quantity);
         $productItems = explode(',', $sale->products_id);
+        $userId = ($sale->user_id);
 
         return view('sales.show', [
             'sale' => $sale,
             'items' => $items,
+            'userId' => $userId,
             'quantities' => $quantities,
             'productItems' => $productItems,
         ]);
@@ -70,13 +74,15 @@ class SalesController extends Controller
                 return implode(',', $item);
             }, $products));
 
-            // dd($q0);
+            $q3 = Auth::user()->id;
+
 
             $sale = Sales::create([
                 'totalSales' => $request->input('totalPrice'),
                 'items' => $q0,
                 'quantity' => $q1,
                 'products_id' => $q2,
+                'user_id' => $q3,
             ]);
 
             foreach ($cart as $key => $value) {
@@ -135,6 +141,13 @@ class SalesController extends Controller
         $key = 1;
 
         return view('sales.today', compact('salesToday', 'totalSalesToday', 'key'));
+    }
+
+    public function salesUser($id)
+    {
+        $solditems = Sales::all()->where('user_id', $id)->sortBy('created_at', 'desc');
+
+        return view('sales.user', compact('solditems'));
     }
 
 }

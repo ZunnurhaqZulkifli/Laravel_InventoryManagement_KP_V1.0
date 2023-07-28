@@ -22,8 +22,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//prior starting laravel -  php artisan serve --host=127.0.0.2 --port=8080 
-
 // Home 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/test', [HomeController::class, 'testPage'])->name('testPage');
@@ -34,7 +32,7 @@ Route::get('/home.image.upload', [HomeController::class,'homeImageUpload'])->nam
 Route::resource('/users', UsersController::class);
 
 // Products
-Route::resource('/products' , ProductsController::class);
+Route::resource('/products' , ProductsController::class)->except(['edit']);
 Route::get('/products.all', [ProductsController::class, 'all'])->name('products.all');
 Route::get('/best.seller', [ProductsController::class, 'hotItem'])->name('best.seller');
 Route::get('/products.stats', [ProductsController::class, 'stats'])->name('products.stats');
@@ -42,15 +40,15 @@ Route::get('/products.brands', [ProductsController::class, 'brands'])->name('pro
 Route::get('/products.variations', [ProductsController::class, 'variations'])->name('products.variations');
 
 // Brands
-Route::resource('/brands', BrandsController::class);
+Route::resource('/brands', BrandsController::class)->except(['create']);
 Route::get('/brands.all', [BrandsController::class, 'allBrands'])->name('brands_all');
 
 // Categories
-Route::resource('/categories', CategoriesController::class);
+Route::resource('/categories', CategoriesController::class)->except(['create']);
 Route::get('/categories.products', [CategoriesController::class, 'index'])->name('categories.products');
 
 // Variations
-Route::resource('/variations', VariationsController::class);
+Route::resource('/variations', VariationsController::class)->except('create');
 Route::get('variations.all', [VariationsController::class, 'all'])->name('variations.all');
 
 // Cart Routes
@@ -68,6 +66,7 @@ Route::get('/sales.all', [SalesController::class, 'salesAll'])->name('sales.all'
 Route::get('/sales.store', [SalesController::class, 'store'])->name('sales.store');
 Route::get('/sales.today', [SalesController::class, 'salesToday'])->name('sales.today');
 Route::post('/sales/add', [SalesController::class, 'addtoTotalSale'])->name('sales.add');
+Route::get('/sales/user/{id}', [SalesController::class, 'salesUser'])->name('sales.user');
 Route::get('/sales.yesterday', [SalesController::class, 'salesYesterday'])->name('sales.yesterday');
 
 //Gallery Controller
@@ -75,6 +74,10 @@ Route::resource('gallery', GalleryController::class);
 Route::get('/gallery.all', [GalleryController::class, 'all'])->name('gallery.all');
 
 //Admins Only
+Route::get('/products/{id}/edit', [ProductsController::class, 'edit'])->name('products.edit')->middleware('can:products.edit');
+Route::get('/variation/create', [VariationsController::class, 'create'])->name('variations.create')->middleware('can:variations.create');
+Route::get('/category/create', [CategoriesController::class, 'create'])->name('categories.create')->middleware('can:categories.create');
+Route::get('/brand/create', [BrandsController::class, 'create'])->name('brands.create')->middleware('can:brands.create');
 
 Auth::routes();
 

@@ -132,7 +132,7 @@ class ProductsController extends Controller
 
         //this is the route rerouting
         Toastr::success('Products Created Successfully', 'Product Created', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('products.create');
+        return redirect()->route('products.show', [$product->id]);
     }
 
     public function update(StoreProducts $request, $id)

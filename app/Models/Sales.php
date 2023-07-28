@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,10 +9,15 @@ class Sales extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['products_id','totalSales', 'items', 'quantity'];
+    protected $fillable = ['products_id','totalSales', 'items', 'quantity', 'user_id'];
     
     public function products()
     {
         $this->hasMany(Products::class);
+    }
+
+    public function users()
+    {
+        $this->hasOne(User::class);
     }
 }

@@ -27,8 +27,9 @@
                     <a href="{{ route('products.show', [$pi]) }}">Product_{{ $pi }}</a>
                 @endforeach)
 
+                <a href="{{ route('sales.user',[$userId]) }}" class="text-dark">Seller = {{ $userId }}</a>    
+                
                 <br>
-
                 <hr>
 
                 <div class="card">

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->decimal("totalSales", 6,2);
             $table->foreignUuid('products_id')->nullable();
+            $table->foreignUuid('user_id')->nullable();
             $table->longText('items')->nullable();
             $table->uuid('quantity')->nullable();
         });

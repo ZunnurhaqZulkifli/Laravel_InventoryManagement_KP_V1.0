@@ -36,8 +36,6 @@ class HomeController extends Controller
         //Mainly for images Purposes
         $images = Gallery::orderBy('created_at', 'asc')->take(3)->get();
 
-        // dd($hotitems);
-
         return view('home.home', [
             'hotitems' => $hotitems,
             'hotimages' => $hotimages,

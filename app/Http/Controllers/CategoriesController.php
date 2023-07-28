@@ -6,7 +6,7 @@ use App\Http\Requests\StoreCategories;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Image;
-use App\Models\Variation;
+use Brian2694\Toastr\Facades\Toastr;
 
 class CategoriesController extends Controller
 {
@@ -45,16 +45,12 @@ class CategoriesController extends Controller
         return view('categories.create', [
             'categories' => $categories,
         ]);
-
     }
 
     public function store(StoreCategories $request)
     {
-        //1. Every store requires a validation
         $validatedData = $request->validated();
-        //2. This is where you get the id for model created
         $validatedData['category_id'] = $request->id;
-        //3. Create an item once data is validated
         $category = Category::create($validatedData);
 
         if($request->hasFile('thumbnail')) {
@@ -66,8 +62,16 @@ class CategoriesController extends Controller
 
         // dd($category);
 
-        $request->session()->flash('status', 'Added a new Categories!');
+        Toastr::success('Added a new category!', 'Category Created', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('home');
+    }
 
-        return redirect()->route('categories.create');
+    public function destroy($id)
+    {
+        $category = Category::findOrfail($id);
+        $category->delete();
+
+        Toastr::error('Category Successfully Removed!', 'Category Deleted!', ["positionClass" => "toast-top-right"]);
+        return view('home');
     }
 }

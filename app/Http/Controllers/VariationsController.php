@@ -6,6 +6,7 @@ use App\Models\Variation;
 use App\Http\Requests\StoreVariation;
 use App\Models\Brand;
 use App\Models\Category;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class VariationsController extends Controller
@@ -13,7 +14,6 @@ class VariationsController extends Controller
     public function create()
     {
         $variations = Variation::all();
-        // $categories = Category::all();
         return view('variation.create', compact('variations'));
     }
 
@@ -24,7 +24,8 @@ class VariationsController extends Controller
         ]);
 
         $variation->save();
-        $request->session()->flash('status', 'Variation Added');
+
+        Toastr::success('Variation Successfully Created!', 'Variation Created!', ["positionClass" => "toast-top-right"]);
         return redirect()->route('variations.create');
     }
 
@@ -38,5 +39,14 @@ class VariationsController extends Controller
     {
         $variations = Variation::all();
         return view('variation.all', compact('variations'));
+    }
+
+    public function destroy($id)
+    {
+        $variation = Category::findOrfail($id);
+        $variation->delete();
+
+        Toastr::error('Variation Successfully Removed!', 'Variation Deleted!', ["positionClass" => "toast-top-right"]);
+        return view('home');
     }
 }

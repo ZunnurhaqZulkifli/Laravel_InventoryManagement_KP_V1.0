@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Products;
 use App\Models\Variation;
+use Brian2694\Toastr\Facades\Toastr;
 
 class BrandsController extends Controller
 {
@@ -45,18 +46,15 @@ class BrandsController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|min:1|max:200',
             'category_id' => 'required|exists:categories,id',
-            'variation_id' => 'required|exists:variations,id',
         ]);
 
         $brand = new Brand();
         $brand->name = $validatedData['name'];
         $brand->category_id = $validatedData['category_id'];
-        $brand->variation_id = $validatedData['variation_id'];
         $brand->save();
 
-        $request->session()->flash('status', 'Added a new Brand!');
-
-        return redirect()->route('brands.create');
+        Toastr::success('Brand Created Successfully', 'Brand Created', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('home');
     }
 
     public function edit($id)
@@ -87,7 +85,7 @@ class BrandsController extends Controller
         $brand->fill($validatedData);
         $brand->save();
 
-        $request->session()->flash('status', 'Brands Was Changed!');
+        Toastr::info('Brand Updated Successfully', 'Brand Updated', ["positionClass" => "toast-top-right"]);
         return redirect()->route('brands.create');
     }
 
@@ -96,8 +94,7 @@ class BrandsController extends Controller
         $brand = Brand::findOrFail($id);
         $brand->delete();
 
-        session()->flash('status', 'The Brand is Deleted!');
-
+        Toastr::error('Brand Deleted Successfully', 'Brand Deleted!', ["positionClass" => "toast-top-right"]);
         return redirect()->route('brands.create');
     }
 }

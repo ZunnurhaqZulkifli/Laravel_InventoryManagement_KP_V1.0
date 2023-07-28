@@ -15,7 +15,7 @@ class GalleryController extends Controller
     public function __construct()
     {
         $this->middleware('auth')
-            ->only(['all']);
+            ->only(['all', 'edit', 'create', 'store']);
     }
 
     public function all()

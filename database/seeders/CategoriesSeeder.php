@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Brand;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
@@ -40,11 +39,11 @@ class CategoriesSeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => 'Raw Ingredients',
+            'name' => 'Consumables',
         ]);
 
         Category::create([
-            'name' => 'Miscellaneous',
+            'name' => 'Electronic',
         ]);
     }
 }
