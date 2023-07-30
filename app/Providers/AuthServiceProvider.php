@@ -24,6 +24,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+
+        Gate::define('sales.all', function ($user) {
+            return $user->is_admin;
+        });
+
         Gate::define('products.stats', function ($user) {
             return $user->is_admin;
         });
@@ -32,7 +37,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->is_admin;
         });
 
-        Gate::define('variations.create', function ($user) {
+        Gate::define('variation.create', function ($user) {
             return $user->is_admin;
         });
 
@@ -44,8 +49,20 @@ class AuthServiceProvider extends ServiceProvider
             return $user->is_admin;
         });
 
+        Gate::define('users.show', function ($user) {
+            return $user->is_admin;
+        });
+
+        Gate::define('users.edit', function ($user) {
+            return $user->is_admin;
+        });
+
+        Gate::define('users.index', function ($user) {
+            return $user->is_admin;
+        });
+
         Gate::before(function($user, $ability) {
-            if ($user->is_admin && in_array($ability, ['update', 'delete'])) {
+            if ($user->is_admin && in_array($ability, ['update', 'delete', 'view'])) {
                 return true;
             }
         });

@@ -4,10 +4,17 @@
     <div class="container">
 
         <div class="display-2">Product</div>
+        
         <hr>
 
         <div class="card">
-            <div class="p-2 display-4">{{ $products->brand->name }} <span class="h2">({{ $products->name }})</span></div>
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <div class="display-4">{{ $products->brand->name }} <span class="h2">({{ $products->name }})</span></div>
+                    <div class="p-1 display-4 bg-dark border rounded text-white">RM{{ $products->price }}</div>
+                </div>
+            </div>
+            
             <div class="row">
                 <div class="col-3">
                     <div class="p-2">
@@ -20,7 +27,7 @@
                             @can('update', $products)
                                 <a class="text-center" href="{{ route('products.edit', [$products->id]) }}">Add an Image</a>
                             @else
-                                <a onclick="return confirm('Contact Admin!')" class="w-100 btn btn-sm btn-outline-dark">Get Admin</a>
+                                <a onclick="return confirm('Contact Admin!')" class="w-100 btn btn-sm btn-outline-dark">No Photos</a>
                             @endcan
                         @endif
                     </div>
@@ -29,17 +36,15 @@
                 <div class="col-9">
                     <div class="p-2 justify-content-center">
                         <div class="card">
-                            <div class="p-2 mb-4">
-                                <div class="mb-2">Product Details :</div>
-                                <div class="mb-2">Price : RM {{ $products->price }}</div>
-                                <div class="mb-2">Type : {{ $products->variation->name }}</div>
-                                <div class="mb-2">Brand : {{ $products->brand->name }}</div>
-                                <div class="mb-2">Liked by : {{ $products->on_pressed }}</div>
+                            <div class="p-2 mb-4 h4">
+                                <div class="p-1 border rounded">Type : {{ $products->variation->name }}</div>
+                                <div class="p-1 border rounded">Brand : {{ $products->brand->name }}</div>
+                                <div class="p-1 border rounded">Liked by : {{ $products->on_pressed }}</div>
 
                                 @if ($products->quantity != null)
-                                    <div class="mb-2">Stock Left : {{ $products->quantity }}</div>
+                                    <div class="p-1 border rounded">Stock Left : {{ $products->quantity }}</div>
                                 @else
-                                    <div class="mb-2">Stock Left : 0</div>
+                                    <div class="p-1 border rounded">Stock Left : 0</div>
                                 @endif
                                 <hr class="mb-2">
                                 <div class="d-flex mb-0">

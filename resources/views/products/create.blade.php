@@ -82,7 +82,7 @@
                     <div>If There is no brands</div>
                     <a class="btn btn-sm btn-outline-primary" href="{{ route('brands.create') }}">Add a Brand</a>
 
-                    <a class="btn btn-sm btn-outline-primary" href="{{ route('variations.create') }}">Add a Variation</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ route('variation.create') }}">Add a Variation</a>
 
                     <a class="btn btn-sm btn-outline-primary" href="{{ route('categories.create') }}">Add a Category</a>
                 </div>

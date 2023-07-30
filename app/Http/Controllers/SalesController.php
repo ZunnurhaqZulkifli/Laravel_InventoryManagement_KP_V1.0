@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use App\Models\Sales;
+use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,8 +18,35 @@ class SalesController extends Controller
     public function __construct()
     {
         $this->middleware('auth')
-            ->only(['show', 'destroy', 'salesAll', 'salesYesterday', 'salesToday']);
+            ->only(['show', 'destroy', 'salesAll', 'salesYesterday', 'salesToday', 'index']);
     }
+
+    public function salesAll()
+    {
+        
+
+        return view('sales.all', compact('users'));
+    }
+
+    public function index()
+    {
+        $allSales = Sales::orderBy('created_at', 'desc')->get();
+        $products = Products::all();
+        $allSalesTotal = Sales::all()->sum('totalSales');
+
+        $totalSalesYesterday = Sales::whereDate('created_at', Carbon::yesterday()
+                ->toDateTimeString())->sum('totalSales');
+
+        $totalSalesToday = Sales::whereDate('created_at', Carbon::today()
+                ->toDateTimeString())->sum('totalSales');
+
+        $key = 1;
+
+        // dd($salesCountedToday);
+
+        return view('sales.index', compact('allSales', 'products', 'allSalesTotal', 'totalSalesToday', 'totalSalesYesterday', 'key', 'totalSalesToday'));
+    }
+
 
     public function show($id)
     {
@@ -44,7 +72,7 @@ class SalesController extends Controller
         $sales->delete();
 
         Toastr::warning('Sales Is Deleted!!!', 'Sales Deleted!!!', ["positionClass" => "toast-top-right"]);
-        return view('sales.all');
+        return view('sales.index');
     }
 
     public function addtoTotalSale(Request $request)
@@ -91,32 +119,13 @@ class SalesController extends Controller
             }
 
             Toastr::info('Sales Good!!!', 'Sales Good!!!', ["positionClass" => "toast-top-right"]);
-            return redirect()->route('sales.all');
+            return redirect()->route('sales.index');
 
         } else {
             Toastr::error('Cart Is Empty!!!', 'Sales Not Good!!!', ["positionClass" => "toast-top-right"]);
             return view('cart');
         }
 
-    }
-
-    public function salesAll()
-    {
-        $allSales = Sales::orderBy('created_at', 'desc')->get();
-        $products = Products::all();
-        $allSalesTotal = Sales::all()->sum('totalSales');
-
-        $totalSalesYesterday = Sales::whereDate('created_at', Carbon::yesterday()
-                ->toDateTimeString())->sum('totalSales');
-
-        $totalSalesToday = Sales::whereDate('created_at', Carbon::today()
-                ->toDateTimeString())->sum('totalSales');
-
-        $key = 1;
-
-        // dd($salesCountedToday);
-
-        return view('sales.all', compact('allSales', 'products', 'allSalesTotal', 'totalSalesToday', 'totalSalesYesterday', 'key', 'totalSalesToday'));
     }
 
     public function salesYesterday()
@@ -143,11 +152,13 @@ class SalesController extends Controller
         return view('sales.today', compact('salesToday', 'totalSalesToday', 'key'));
     }
 
-    public function salesUser($id)
+    public function salesByUser($id)
     {
-        $solditems = Sales::all()->where('user_id', $id)->sortBy('created_at', 'desc');
+        $mySales = Sales::all()->where('user_id', $id);
+        $myTotalSales = $mySales->sum('totalSales');
+        $key = 1;
 
-        return view('sales.user', compact('solditems'));
+        return view('sales.user', compact('mySales', 'myTotalSales', 'key'));
     }
 
 }

@@ -12,22 +12,27 @@ class Variation extends Model
 
     public function products()
     {
-        $this->hasMany(Products::class);
+        return $this->hasMany(Products::class);
     }
 
     public function brands()
     {
-        $this->hasMany(Brand::class);
+        return $this->hasMany(Brand::class);
     }
 
     public function categories()
     {
-        $this->hasMany(Category::class);
+        return $this->hasMany(Category::class);
     }
 
     public function category()
     {
-        $this->hasMany(Category::class);
+        return $this->hasMany(Category::class);
+    }
+
+    public function image()
+    {
+        return $this->hasOne(Image::class);
     }
     
     use HasFactory;

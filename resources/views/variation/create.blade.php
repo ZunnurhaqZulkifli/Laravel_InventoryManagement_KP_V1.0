@@ -14,7 +14,7 @@
         </div>
 
         <div class="mt-4">
-            <form  method="POST" action="{{ route('variations.store') }}" enctype="multipart/from-data">
+            <form  method="POST" action="{{ route('variation.store') }}" enctype="multipart/from-data">
                 @csrf
                     <div>
                         <div class="h4">Add a new variation</div>

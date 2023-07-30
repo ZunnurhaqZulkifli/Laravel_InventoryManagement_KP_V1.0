@@ -6,7 +6,9 @@ use App\Http\Requests\StoreCategories;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Products;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Storage;
 
 class CategoriesController extends Controller
 {
@@ -19,8 +21,9 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $products = Products::with('category','brand', 'variation')->get();
 
-        return view('products.categories', compact('categories'));
+        return view('categories.index', compact('categories', 'products'));
     }
 
     public function show($id)
@@ -60,10 +63,46 @@ class CategoriesController extends Controller
             );
         }
 
-        // dd($category);
-
         Toastr::success('Added a new category!', 'Category Created', ["positionClass" => "toast-top-right"]);
         return redirect()->route('home');
+    }
+
+
+    public function all()
+    {
+        $categories = Category::all();
+        return view('categories.all', compact('categories'));
+    }
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('categories.edit', compact('category'));
+    }
+
+    public function update(StoreCategories $request, $id)
+    {
+        $category = Category::findOrFail($id);
+        $validatedData = $request->validated();
+        $category->fill($validatedData);
+
+        if ($request->hasFile('thumbnail')) {
+            $path = $request->file('thumbnail')->store('Category_Images');
+
+            if ($category->image) {
+                Storage::delete($category->image->path);
+                $category->image->path = $path;
+                $category->image->save();
+            } else {
+                $category->image()->save(
+                    Image::create(['path' => $path])
+                );
+            }
+        }
+
+        $category->save();
+
+        Toastr::info('Category Updated Successfully', 'Category Updated', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('categories.show', [$category->id]);
     }
 
     public function destroy($id)

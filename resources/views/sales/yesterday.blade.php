@@ -2,50 +2,47 @@
 
 @section('content')
     <div class="container">
-        <div class="p-2">
-            
-            <div class="row justify-content-center">
-                <div class="fw-bold display-6 mt-2 mb-2">Total Sales<span class="fw-light h4"> (Yesterday)</span></div>
-                <div class="card">
-                    <div class="col-12">
-                        <table class="table table-striped">
-                            <thead>
+        <div class="row justify-content-center">
+            <div class="fw-bold display-6 mt-2 mb-2">Total Sales<span class="fw-light h4"> (Yesterday)</span></div>
+            <div class="card">
+                <div class="col-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Invoice_ID</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            @foreach ($salesYesterday as $sale)
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Invoice_ID</th>
-                                    <th scope="col">Price</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                @foreach ($salesYesterday as $sale)
-                                    <tr>
-                                        <td>{{ $key++ }}</td>
-                                        <td>
-                                            <a href="{{ route('sales.show', [$sale->id]) }}">Invoice
-                                                Details_{{ $sale->created_at }}</a>
-                                        </td>
+                                    <td>{{ $key++ }}</td>
+                                    <td>
+                                        <a href="{{ route('sales.show', [$sale->id]) }}">Invoice
+                                            Details_{{ $sale->created_at->format('d/m/Y H:i') }}</a>
+                                    </td>
 
-                                        <td>
-                                            <a>RM {{ $sale->totalSales }}</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-
-                            <tfoot>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="">
-                                        <div class="fw-bold">TOTAL SALE = RM {{ number_format($totalSalesYesterday, 2) }}</div>
+                                    <td>
+                                        <a>RM {{ $sale->totalSales }}</a>
                                     </td>
                                 </tr>
-                            </tfoot>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td class="">
+                                    <div class="fw-bold">TOTAL SALE = RM {{ number_format($totalSalesYesterday, 2) }}</div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
-                <a class="w-100 btn btn-sm btn-outline-success mt-2" href="{{ route('sales.all') }}">Total Sales</a>
             </div>
+            <a class="w-100 btn btn-sm btn-outline-success mt-2" href="{{ route('sales.all') }}">Total Sales</a>
         </div>
     </div>
 @endsection

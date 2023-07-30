@@ -18,14 +18,14 @@ class GalleryController extends Controller
             ->only(['all', 'edit', 'create', 'store']);
     }
 
-    public function all()
+    public function index()
     {
         $homeImages = Gallery::all();
         $categoryImages = Category::all();
         $productImages = Products::with('image')->get()->all();
         
         // dd($images);
-        return view('gallery.all', compact('productImages', 'homeImages', 'categoryImages'));
+        return view('gallery.index', compact('productImages', 'homeImages', 'categoryImages'));
     }
     
     public function store(StoreGallery $request)

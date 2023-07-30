@@ -82,7 +82,7 @@
                                     <form action="{{ route('sales.add') }}" method="POST">
                                         @csrf
                                         <div class="d-flex">
-                                            <a href="{{ route('products.all') }}" class="btn btn-primary"><i
+                                            <a href="{{ route('products.index') }}" class="btn btn-primary"><i
                                                     class="fa fa-angle-left"></i>
                                                 All Products
                                             </a>
@@ -94,7 +94,7 @@
                                     </form>
                                 @else
                                     <div class="d-flex">
-                                        <a href="{{ route('products.all') }}" class="btn btn-primary"><i
+                                        <a href="{{ route('products.index') }}" class="btn btn-primary"><i
                                                 class="fa fa-angle-left"></i>
                                             All Products
                                         </a>

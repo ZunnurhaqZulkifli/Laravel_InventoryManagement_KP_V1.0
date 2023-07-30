@@ -11,7 +11,6 @@ use App\Models\Sales;
 use App\Models\Variation;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
@@ -20,7 +19,7 @@ class ProductsController extends Controller
     public function __construct()
     {
         $this->middleware('auth')
-            ->only(['show', 'create', 'store', 'edit', 'update', 'destroy', 'all', 'categories', 'productCart', 'stats']);
+            ->only(['show', 'create', 'store', 'edit', 'update', 'destroy', 'all', 'categories', 'productCart', 'stats', 'index']);
     }
 
     public function hotItem()
@@ -29,16 +28,6 @@ class ProductsController extends Controller
 
         return view('best.seller', [
             'hotitems' => $hotitems,
-        ]);
-    }
-
-    public function index()
-    {
-        $products = Products::with('category', 'brand', 'variation')->orderBy('price', 'desc')->get();
-        // dd($products);
-        return view('products.index', [
-            'products' => $products,
-            'categories' => Category::with('products')->orderBy('created_at', 'asc')->get(),
         ]);
     }
 
@@ -76,7 +65,7 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function all(Request $request)
+    public function index(Request $request)
     {
 
         $brandName = Products::with('brands');
@@ -96,13 +85,13 @@ class ProductsController extends Controller
                 }
             }],
         ])
-            ->orderBy("id", "desc")
+            ->orderBy("id", "asc")
             ->paginate(100);
 
         $totalQuantity = $products->count('quantity');
         // dd($totalQuantity);
 
-        return view('products.all',
+        return view('products.index',
             [
                 'products' => $products,
                 'brandName' => $brandName,

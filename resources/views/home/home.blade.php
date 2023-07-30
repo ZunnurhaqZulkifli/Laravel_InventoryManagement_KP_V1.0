@@ -8,7 +8,7 @@
                 <div class="p-4">
                     <div class="fs-4 fw-bold mt-1 text-center">Find Products <span class="fs-6 fw-light">powered by ~z.z~</span>
                     </div>
-                    <form class="d-flex" action="{{ route('products.all') }}" method="GET" role="search">
+                    <form class="d-flex" action="{{ route('products.index') }}" method="GET" role="search">
                         <input class="form-control" type="text" name="term" id="term" placeholder="Search"
                             aria-label="Search">
 
@@ -71,7 +71,7 @@
 
             @auth
                 <div class="mt-2">
-                    <a class="btn btn-sm w-100 btn-outline-dark" href="{{ route('gallery.all') }}">Edit Images</a>
+                    <a class="btn btn-sm w-100 btn-outline-dark" href="{{ route('gallery.index') }}">All Images</a>
                 </div>
             @endauth
 
@@ -89,7 +89,7 @@
                     <div class="d-flex">
                         <a class="btn btn-sm btn-outline-dark w-100 mb-2 disabled">RM{{ number_format($total, 2) }}</a>
                         <div class="ps-1"></div>
-                        <a class="btn btn-sm btn-outline-success mb-2" href="{{ route('sales.all') }}">Sales</a>
+                        <a class="btn btn-sm btn-outline-success mb-2" href="{{ route('sales.index') }}">Sales</a>
                     </div>
                 </div>
             </div>
@@ -135,7 +135,6 @@
             </div>
             
             <hr>
-
         </div>
     </div>
 @endsection('content')

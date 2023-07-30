@@ -18,27 +18,32 @@ class BrandsController extends Controller
             ->only(['show', 'create', 'update', 'allBrands']);
     }
 
-
-    public function create()
-    {
-        $categories = Category::all();
-        $brands = Brand::all();
-        $variations = Variation::all();
-        return view('brands.create', compact('categories', 'brands', 'variations'));
-    }
-
-    public function allBrands()
+    public function index()
     {
 
         $brands = Brand::all();
         $products = Products::with('category','brand', 'variation')->get();
         $category = Category::all();
 
-        return view('brands.all' , [
+        return view('brands.index' , [
             'products'=> $products , 
             'categories' => Category::with('products')->get(),
             'brands' => $brands,
         ]);
+    }
+
+    public function all()
+    {
+        $brands = Brand::all();
+        return view('brands.all', compact('brands'));
+    }
+    
+    public function create()
+    {
+        $categories = Category::all();
+        $brands = Brand::all();
+        $variations = Variation::all();
+        return view('brands.create', compact('categories', 'brands', 'variations'));
     }
 
     public function store(StoreBrands $request)

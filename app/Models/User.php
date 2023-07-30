@@ -43,4 +43,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function sales()
+    {
+        return $this->hasMany(Sales::class);
+    }
+
+    public function getTotalSalesAttribute()
+    {
+        return $this->sales()->sum('totalSales');
+    }
+
+    public function image()
+    {
+        return $this->hasOne(Image::class);
+    }
 }

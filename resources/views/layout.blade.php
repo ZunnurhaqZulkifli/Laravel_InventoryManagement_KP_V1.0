@@ -47,21 +47,29 @@
         <nav class="my-md-0 mr-md-3">
 
             <a class="btn btn-outline-primary" href="{{ route('home') }}"><i class="fa-solid fa-house"></i> Home</a>
-            <a class="btn btn-outline-primary" href="{{ route('products.all') }}"><i
+            <a class="btn btn-outline-primary" href="{{ route('products.index') }}"><i
                     class="fa-solid fa-bag-shopping"></i> Products</a>
             <a class="btn btn-outline-primary" href="{{ route('products.create') }}"><i class="fa-solid fa-barcode"></i>
                 Create</a>
-            <a class="btn btn-outline-primary" href="{{ route('brands_all') }}"><i class="fa-brands fa-apple fa-lg"></i>
+            <a class="btn btn-outline-primary" href="{{ route('brands.index') }}"><i class="fa-brands fa-apple fa-lg"></i>
                 Brands</a>
+            <a class="btn btn-outline-primary" href="{{ route('sales.index') }}"><i
+                    class="fa-solid fa-cash-register"></i> Sales</a>
 
             @guest
                 @if (Route::has('login'))
                     <a class="btn btn btn-outline-dark" href="{{ route('login') }}">{{ __('Login') }}</a>
                 @endif
             @else
-                <a class="btn btn btn-outline-primary" href="{{ route('users.show', [ Auth::user()->id]) }}" role="button">
-                    <i class="fa-regular fa-user"></i> {{ Auth::user()->name }}
-                </a>
+                @can('update')
+                    <a class="btn btn btn-outline-primary" href="{{ route('users.index') }}" role="button">
+                        <i class="fa-regular fa-user"></i> {{ Auth::user()->name }}
+                    </a>
+                @else
+                    <a class="btn btn btn-outline-primary" href="{{ route('sales.user', [Auth::user()->id]) }}" role="button">
+                        <i class="fa-regular fa-user"></i> {{ Auth::user()->name }}
+                    </a>
+                @endcan
 
                 <a class="btn btn-outline-primary" href="{{ route('shopping.cart') }}">
                     <i class="fa fa-shopping-cart"></i> <span
@@ -88,7 +96,7 @@
 
                         <div class="ps-1"></div>
 
-                        <a href="{{ route('sales.all') }}" class="btn btn-outline-dark"><i
+                        <a href="{{ route('sales.index') }}" class="btn btn-outline-dark"><i
                                 class="fa-solid fa-cash-register" style="color: #ff4800"></i></a>
 
                         <div class="ps-1"></div>
@@ -116,7 +124,7 @@
 
                         <div class="ps-1"></div>
                         <a class="btn btn-outline-dark" href="{{ url()->previous() }}" style="color: #ff4800">BACK</a>
-                        
+
                     </div>
 
                     <div class="form-check form-switch mt-2">
@@ -136,18 +144,18 @@
                         <div class="d-flex p-2 row row-cols-4 row-cols-lg-4 g-1">
 
                             <div class="col">
-                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('products.all') }}"><i
-                                        class="fa-solid fa-bag-shopping"></i><br>Products</a>
+                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('variation.index') }}"><i
+                                        class="fa-solid fa-bag-shopping"></i><br>Variation</a>
                             </div>
 
                             <div class="col">
                                 <a class="w-100 btn btn-sm btn-outline-dark"
-                                    href="{{ route('categories.products') }}">
+                                    href="{{ route('categories.index') }}">
                                     <i class="fa-solid fa-filter"></i><br>Category</a>
                             </div>
 
                             <div class="col">
-                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('brands_all') }}">
+                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('brands.index') }}">
                                     <i class="fa-brands fa-apple fa-lg"></i><br>Brands</a>
                             </div>
 
@@ -176,18 +184,16 @@
                     <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('categories.create') }}"> Add
                         New Category </a>
                     <hr>
-                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('variations.create') }}"> Add
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('variation.create') }}"> Add
                         New Variaiton </a>
                     <hr>
-                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('gallery.all') }}"><i
-                            class="fa-regular fa-images"></i> Images</a>
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('gallery.index') }}"><i
+                            class="fa-regular fa-images"></i> Gallery Images</a>
                     <hr>
-
                     <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('products.stats') }}">Product
                         Stats</a>
                     <hr>
-                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('sales.all') }}">Sales</a>
-
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('sales.index') }}">Sales</a>
                 </div>
 
                 <div class="p-2 text-center">
@@ -204,7 +210,7 @@
             </p>
         @endif
 
-        <div class="container">
+        <div class="container p-1">
             @include('flash-message')
             {!! Toastr::message() !!}
             @yield('content')

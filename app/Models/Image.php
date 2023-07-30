@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
 {
-    protected $fillable = ['path' , 'products_id', 'gallery_id'];
+    protected $fillable = ['path' , 'products_id', 'gallery_id', 'users_id', 'variation_id'];
     use HasFactory;
 
     public function url()
@@ -26,8 +26,18 @@ class Image extends Model
         return $this->belongsTo(Gallery::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function variation()
+    {
+        return $this->belongsTo(Variation::class);
     }
 }
