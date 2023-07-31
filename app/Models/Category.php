@@ -36,4 +36,9 @@ class Category extends Model
         return $this->hasOne(Image::class);
     }
 
+    public function getCountedProducts()
+    {
+        return $this->products()->count('products');
+    }
+
 }

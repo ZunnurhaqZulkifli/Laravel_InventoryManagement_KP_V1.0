@@ -53,12 +53,13 @@
                             <td><a
                                     class="fw-bold text-uppercase text-dark text-decoration-none"href="{{ route('products.show', [$product->id]) }}">{{ $product->name }}</a>
                             </td>
-                            <td><a class="text-dark text-decoration-none"
+                            <td><a class="text-dark"
                                     href="{{ route('brands.show', [$product->brand->id]) }}">{{ $product->brand->name }}</a>
                             </td>
-                            <td><a>{{ $product->variation->name }}</a></td>
+                            <td><a class="text-dark"
+                                    href="{{ route('variation.show', [$product->variation->id]) }}">{{ $product->variation->name }}</a></td>
                             <td></td>
-                            <td><a class="text-dark text-decoration-none"
+                            <td><a class="text-dark"
                                     href="{{ route('categories.show', [$product->category->id]) }}">{{ $product->category->name }}</a>
                             </td>
                             <td>

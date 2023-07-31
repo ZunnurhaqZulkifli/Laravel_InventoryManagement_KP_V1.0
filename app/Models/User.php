@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->sales()->sum('totalSales');
     }
 
+    public function getName()
+    {
+        return $this->users('name');
+    }
+
     public function image()
     {
         return $this->hasOne(Image::class);

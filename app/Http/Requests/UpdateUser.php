@@ -22,6 +22,8 @@ class UpdateUser extends FormRequest
     public function rules(): array
     {
         return [
+            // 'name' => 'bail|min:1|max:200|required',
+            'email' => 'email|min:4|max:255',
             'thumbnail' => 'image|mimes:jpg,jpeg,png,gif,svg|max:2048'
         ];
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gallery;
 use App\Models\Products;
 use App\Models\Sales;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -20,6 +21,10 @@ class HomeController extends Controller
             ->where('on_pressed', '>=', '5')
             ->orderBy('on_pressed', 'desc')
             ->get();
+
+        $topSales = User::with(['sales' => function ($query) {
+            $query->orderBy('totalSales', 'desc');
+        }])->get();
 
         $sales = Sales::orderBy('created_at', 'desc')
             ->take(3)
@@ -43,6 +48,7 @@ class HomeController extends Controller
             'images' => $images,
             'sales' => $sales,
             'total' => $total,
+            'topSales' => $topSales,
         ]);
 
     }

@@ -40,7 +40,7 @@ class VariationsController extends Controller
         $variation->save();
 
         Toastr::success('Variation Successfully Created!', 'Variation Created!', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('variations.create');
+        return redirect()->route('products.create');
     }
 
     public function show($id)

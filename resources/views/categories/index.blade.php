@@ -27,9 +27,9 @@
                                     src="{{ asset('images/NULL.jpg') }}" @endif>
                         </div>
 
-                        @foreach ($category->brands as $brand)
+                        @foreach ($category->products as $product)
                             <a class="btn btn-sm btn-outline-dark mb-2 rounded-0"
-                                href="{{ route('brands.show', [$brand->id]) }}">{{ $brand->name }}</a>
+                                href="{{ route('products.show', [$product->id]) }}">{{ $product->name }}</a>
                         @endforeach
                     </div>
                 @endforeach

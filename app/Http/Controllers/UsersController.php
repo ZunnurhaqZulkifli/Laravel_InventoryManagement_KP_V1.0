@@ -54,13 +54,6 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-
-        $users = User::all();
-        $highestSales = User::with(['sales' => function($query) {
-            $query;
-        }])->get();
-
-
         $key = 1;
 
         $user = User::find($id);
@@ -83,8 +76,12 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUser $request, User $user)
+    public function update(UpdateUser $request, $id)
     {
+        $user = User::findOrFail($id);
+        $validatedData = $request->validated();
+        $user->fill($validatedData);
+
         if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('avatars');
             
@@ -98,6 +95,7 @@ class UsersController extends Controller
             }
         }
 
+        $user->save();
         Toastr::success('Profile Was Updated', 'Proflie Updated', ["positionClass" => "toast-top-right"]);
         return redirect()->route('home');
     }

@@ -8,7 +8,7 @@
             <div class="p-2">
                 <h4>Lists of all the variations</h4>
                 @foreach ($variations as $variation)
-                    <a class="btn btn-sm mb-2 btn-outline-dark">{{ $variation->name }}</a> |
+                    <a href="{{ route('variation.edit', [$variation->id]) }}" class="btn btn-sm mb-2 btn-outline-dark">{{ $variation->name }}</a> |
                 @endforeach
             </div>
         </div>

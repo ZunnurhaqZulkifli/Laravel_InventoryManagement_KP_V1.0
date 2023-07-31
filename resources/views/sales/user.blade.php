@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="container">
-        <div class="display-6">My Sales</div>
+        
+        <div class="display-6">{{ $user->name }}'s Sales</div>
+
         <div class="card">
             <table class="table table-striped">
 

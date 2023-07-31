@@ -8,7 +8,7 @@
             <div class="p-2">
                 <h4>Lists of all the categories</h4>
                 @foreach ($categories as $category)
-                    <a class="btn btn-sm mb-1 btn-outline-dark">{{ $category->name }}</a> |
+                    <a href="{{ route('categories.edit', [$category->id]) }}" class="btn btn-sm mb-1 btn-outline-dark">{{ $category->name }}</a> |
                 @endforeach
             </div>
         </div>

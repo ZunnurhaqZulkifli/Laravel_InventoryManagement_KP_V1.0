@@ -42,7 +42,7 @@
                     </table>
                 </div>
             </div>
-            <a class="w-100 btn btn-sm btn-outline-success mt-2" href="{{ route('sales.all') }}">Total Sales</a>
+            <a class="w-100 btn btn-sm btn-outline-success mt-2" href="{{ route('sales.index') }}">Total Sales</a>
         </div>
     </div>
 @endsection

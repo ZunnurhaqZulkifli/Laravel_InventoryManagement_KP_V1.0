@@ -6,22 +6,24 @@
         <div class="col-9">
             <div class="card">
                 <div class="p-4">
-                    <div class="fs-4 fw-bold mt-1 text-center">Find Products <span class="fs-6 fw-light">powered by ~z.z~</span>
+                    <div class="fs-4 fw-bold mt-1 text-center">Find Products <span class="fs-6 fw-light">powered by
+                            ~z.z~</span>
                     </div>
                     <form class="d-flex" action="{{ route('products.index') }}" method="GET" role="search">
                         <input class="form-control" type="text" name="term" id="term" placeholder="Search"
                             aria-label="Search">
 
-                            <div class="ps-1"></div>
-                            <div class="vr"></div>
-                            <div class="ps-1"></div>
-                
-                        <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #198754;"></i></button>
+                        <div class="ps-1"></div>
+                        <div class="vr"></div>
+                        <div class="ps-1"></div>
+
+                        <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"
+                                style="color: #198754;"></i></button>
                     </form>
                 </div>
             </div>
 
-    <hr>
+            <hr>
 
             <div class="card shadow-sm p-2 mb-2 bg-body-tertiary rounded">
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
@@ -38,14 +40,13 @@
                                     <center><a>{{ $image->name }}</a></center>
                                 </div>
                             @else
-                                
                             @endif
                         @endforeach
                     </div>
                 </div>
             </div>
 
-    <hr>
+            <hr>
 
             <div class="card">
                 <div class="h4 text-center mt-2">Good Products</div>
@@ -75,14 +76,14 @@
                 </div>
             @endauth
 
-    <hr>
+            <hr>
 
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat expedita veritatis ducimus nisi quae odit,
                 sapiente maiores fugit, voluptate ipsum quia hic, dolorem in? Suscipit beatae autem eius iure voluptatibus.
             </p>
         </div>
 
-        <div class="col-3 text-center">        
+        <div class="col-3 text-center">
             <div class="card">
                 <div class="fs-4 fw-bold mt-1">Total Sales<span class="fs-6 fw-light"> (Monthly)</span></div>
                 <div class="p-2">
@@ -91,6 +92,19 @@
                         <div class="ps-1"></div>
                         <a class="btn btn-sm btn-outline-success mb-2" href="{{ route('sales.index') }}">Sales</a>
                     </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="card mt-2">
+                <div class="p-2">
+                    <div class="fs-4 fw-bold">Top Sales</div>
+                        @foreach ($topSales as $sale)
+                            @if ($sale->totalSales != null)
+                                <a class="btn btn-sm w-100 btn-outline-danger mb-2">RM{{ $sale->totalSales }}</a>
+                            @endif
+                        @endforeach
                 </div>
             </div>
 
@@ -108,7 +122,7 @@
             </div>
 
             <hr>
-            
+
             <div class="card">
                 <div class="fs-4 fw-bold mt-1">Best Selling<h6> - by price</h6>
                 </div>
@@ -133,7 +147,7 @@
                     @endforeach
                 </div>
             </div>
-            
+
             <hr>
         </div>
     </div>

@@ -59,7 +59,7 @@ class BrandsController extends Controller
         $brand->save();
 
         Toastr::success('Brand Created Successfully', 'Brand Created', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('home');
+        return redirect()->route('products.create');
     }
 
     public function edit($id)

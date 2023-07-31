@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\GalleryController;
@@ -52,6 +53,7 @@ Route::get('/variation.all', [VariationsController::class, 'all'])->name('variat
 
 // Cart Routes
 Route::get('/cart', [ProductsController::class, 'cart'])->name('shopping.cart');
+Route::get('/products.all', [ProductsController::class, 'all'])->name('products.all');
 Route::post('/sales.create', [ProductsController::class, 'addtoTotalSale'])->name('addtoTotalSale');
 Route::get('/product/{id}', [ProductsController::class, 'addProductstoCart'])->name('addproducts.to.cart');
 Route::patch('/update-shopping-cart', [ProductsController::class, 'updateCart'])->name('update.sopping.cart');
@@ -71,9 +73,10 @@ Route::get('/sales.yesterday', [SalesController::class, 'salesYesterday'])->name
 Route::resource('/gallery', GalleryController::class);
 
 //Admins Only
+Route::get('/admin/products/create', [AdminController::class, 'create'])->name('admin.products.create');
+
 Route::get('/users', [UsersController::class, 'index'])->name('users.index')->middleware('can:users.index');
 Route::get('/users/{id}', [UsersController::class, 'show'])->name('users.show')->middleware('can:users.show');
-Route::get('/sales.top', [SalesController::class, 'salesAll'])->name('sales.top3')->middleware('can:sales.all');
 Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->name('users.edit')->middleware('can:users.edit');
 Route::get('/brand/create', [BrandsController::class, 'create'])->name('brands.create')->middleware('can:brands.create');
 Route::get('/products/{id}/edit', [ProductsController::class, 'edit'])->name('products.edit')->middleware('can:products.edit');

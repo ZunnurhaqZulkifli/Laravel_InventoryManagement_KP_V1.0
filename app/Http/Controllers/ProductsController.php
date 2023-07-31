@@ -101,6 +101,17 @@ class ProductsController extends Controller
             );
     }
 
+    public function all()
+    {
+        $categories = Category::all();
+        $products = Products::with('category','brand', 'variation')->get();
+        
+        return view('products.all', [
+            'products' => $products,
+            'categories' => $categories,
+        ]);
+    }
+
     public function store(StoreProducts $request)
     {
 
@@ -168,7 +179,7 @@ class ProductsController extends Controller
         $product = Products::findOrFail($id);
         $product->delete();
 
-        Toastr::danger('Products Successfully Deleted', 'Products Deleted!', ["positionClass" => "toast-top-right"]);
+        Toastr::error('Products Successfully Deleted', 'Products Deleted!', ["positionClass" => "toast-top-right"]);
         return redirect()->route('products.index');
     }
 

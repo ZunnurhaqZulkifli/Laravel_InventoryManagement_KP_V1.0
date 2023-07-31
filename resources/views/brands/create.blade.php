@@ -9,7 +9,7 @@
                 <div class="p-2">
                     <h4>Lists of all the brands</h4>
                     @foreach ($brands as $brand)
-                        <a href="{{ route('brands.show', ['brand' => $brand->id]) }}" class="btn btn-sm mb-2 btn-outline-dark">{{ $brand->name }}</a> |
+                        <a href="{{ route('brands.edit', ['brand' => $brand->id]) }}" class="btn btn-sm mb-2 btn-outline-dark">{{ $brand->name }}</a> |
                     @endforeach
                 </div>
             </div>

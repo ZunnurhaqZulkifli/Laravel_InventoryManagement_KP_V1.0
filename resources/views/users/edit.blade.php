@@ -26,7 +26,12 @@
             <div class="col-8">
                 <div class="form-group">
                     <label class="text-dark">Name :</label>
-                    <input class="form-control" value="" placeholder="{{ $user->name }}" type="text" disabled />
+                    <input class="form-control" value="{{ old('name', $user->name ?? null ) }}" placeholder="{{ $user->name }}" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Email :</label>
+                    <input class="form-control" value="{{ old('email', $user->email ?? null ) }}" placeholder="{{ $user->email }}" type="email">
                 </div>
 
                 <div class="form-group">

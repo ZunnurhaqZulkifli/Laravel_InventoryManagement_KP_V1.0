@@ -21,13 +21,6 @@ class SalesController extends Controller
             ->only(['show', 'destroy', 'salesAll', 'salesYesterday', 'salesToday', 'index']);
     }
 
-    public function salesAll()
-    {
-        
-
-        return view('sales.all', compact('users'));
-    }
-
     public function index()
     {
         $allSales = Sales::orderBy('created_at', 'desc')->get();
@@ -41,8 +34,6 @@ class SalesController extends Controller
                 ->toDateTimeString())->sum('totalSales');
 
         $key = 1;
-
-        // dd($salesCountedToday);
 
         return view('sales.index', compact('allSales', 'products', 'allSalesTotal', 'totalSalesToday', 'totalSalesYesterday', 'key', 'totalSalesToday'));
     }
@@ -154,11 +145,16 @@ class SalesController extends Controller
 
     public function salesByUser($id)
     {
+
+        $user = User::find($id);
         $mySales = Sales::all()->where('user_id', $id);
+
         $myTotalSales = $mySales->sum('totalSales');
         $key = 1;
 
-        return view('sales.user', compact('mySales', 'myTotalSales', 'key'));
+        // dd($user);
+
+        return view('sales.user', compact('mySales', 'myTotalSales', 'key', 'user'));
     }
 
 }

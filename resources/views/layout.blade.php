@@ -46,22 +46,23 @@
 
         <nav class="my-md-0 mr-md-3">
 
-            <a class="btn btn-outline-primary" href="{{ route('home') }}"><i class="fa-solid fa-house"></i> Home</a>
-            <a class="btn btn-outline-primary" href="{{ route('products.index') }}"><i
-                    class="fa-solid fa-bag-shopping"></i> Products</a>
-            <a class="btn btn-outline-primary" href="{{ route('products.create') }}"><i class="fa-solid fa-barcode"></i>
-                Create</a>
-            <a class="btn btn-outline-primary" href="{{ route('brands.index') }}"><i class="fa-brands fa-apple fa-lg"></i>
-                Brands</a>
-            <a class="btn btn-outline-primary" href="{{ route('sales.index') }}"><i
-                    class="fa-solid fa-cash-register"></i> Sales</a>
+            <a class="btn btn-outline-primary" href="{{ route('home') }}">
+                <i class="fa-solid fa-house"></i> Home</a>
+            <a class="btn btn-outline-primary" href="{{ route('products.index') }}">
+                <i class="fa-solid fa-bag-shopping"></i> Products</a>
+            <a class="btn btn-outline-primary" href="{{ route('products.create') }}">
+                <i class="fa-solid fa-barcode"></i> Create</a>
+            <a class="btn btn-outline-primary" href="{{ route('products.all') }}">
+                <i class="fa-solid fa-filter"></i> Category</a>
+            <a class="btn btn-outline-primary" href="{{ route('sales.index') }}">
+                <i class="fa-solid fa-cash-register"></i> Sales</a>
 
             @guest
                 @if (Route::has('login'))
                     <a class="btn btn btn-outline-dark" href="{{ route('login') }}">{{ __('Login') }}</a>
                 @endif
             @else
-                @can('update')
+                @can('view')
                     <a class="btn btn btn-outline-primary" href="{{ route('users.index') }}" role="button">
                         <i class="fa-regular fa-user"></i> {{ Auth::user()->name }}
                     </a>
@@ -114,9 +115,8 @@
                         @else
                             @csrf
                             <a class="p-2 btn btn btn-outline-dark" href="{{ route('logout') }}" style="color: #ff4800"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                                    class="fab fa-laravel" style="color: #ff4800"></i> LOGOUT</a>
-
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                LOGOUT</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -124,7 +124,6 @@
 
                         <div class="ps-1"></div>
                         <a class="btn btn-outline-dark" href="{{ url()->previous() }}" style="color: #ff4800">BACK</a>
-
                     </div>
 
                     <div class="form-check form-switch mt-2">
@@ -149,8 +148,7 @@
                             </div>
 
                             <div class="col">
-                                <a class="w-100 btn btn-sm btn-outline-dark"
-                                    href="{{ route('categories.index') }}">
+                                <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('products.all') }}">
                                     <i class="fa-solid fa-filter"></i><br>Category</a>
                             </div>
 
@@ -178,22 +176,23 @@
                 <div class="p-2 text-center">
                     <div class="fs-5">Admin Pannel</div>
                     <hr>
-                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('brands.create') }}"> Add New
-                        Brands </a>
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('sales.index') }}">Sales</a>
+
                     <hr>
-                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('categories.create') }}"> Add
-                        New Category </a>
+
+                    @can('create')
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-outline-dark w-100">Master
+                            Create</a>
+                    @endcan
+                    
                     <hr>
-                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('variation.create') }}"> Add
-                        New Variaiton </a>
-                    <hr>
+                    
                     <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('gallery.index') }}"><i
                             class="fa-regular fa-images"></i> Gallery Images</a>
                     <hr>
                     <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('products.stats') }}">Product
                         Stats</a>
                     <hr>
-                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('sales.index') }}">Sales</a>
                 </div>
 
                 <div class="p-2 text-center">
