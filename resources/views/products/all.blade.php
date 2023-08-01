@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="display-4 fw-bold">Products Catalogue</div>
+    <div class="display-2">Products Catalogue</div>
     <div class="mt-4">
         <div class="card">
             <div class="p-1">
@@ -29,7 +29,7 @@
                 <div class="mt-2 mb-4">
                     <div class="card">
                         <div class="p-2">
-                            <div class="text-center display-3">{{ $category->name }}</div>
+                            <div class="text-center display-3 fw-bold">{{ $category->name }}</div>
                             <hr>
                             <div class="row row-cols-1 row-cols-md-3 gx-2 gy-2">
                                 @foreach ($category->products->take($items) as $product)

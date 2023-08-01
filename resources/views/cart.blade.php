@@ -10,14 +10,11 @@
                 <div class="text-danger text-center">
                     **** Please Take Note ****
                     <br>
-                    1. All items has to be "saled" out in order to make sure that item is not "magically" gone, 
+                    1. All items has to be "saled" out in order to make sure that item is not "magically" dissappear, 
                     especially if the session timed-out.
                     
                     <br>
                     2. The use of customer "return cash" is experimental, double check the price!.
-
-                    <br>
-                    3. Make Sure all of the items is the right item, brand, price and more.
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="fw-bold display-6 mt-2 mb-2">Total Sales<span class="fw-light h4"> (Yesterday)</span></div>
+            <div class="display-2 mt-2">Total Sales<span class="fw-light h1"> (Yesterday)</span></div>
             <div class="card">
                 <div class="col-12">
                     <table class="table table-striped">

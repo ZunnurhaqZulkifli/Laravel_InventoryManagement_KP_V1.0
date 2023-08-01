@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="display-4">Inventory Management</div>
+    <div class="display-2">Inventory Management</div>
     <div class="row mt-4">
         <div class="col-9">
             <div class="card">
@@ -9,7 +9,7 @@
                     <div class="fs-4 fw-bold mt-1 text-center">Find Products <span class="fs-6 fw-light">powered by
                             ~z.z~</span>
                     </div>
-                    
+
                     <div class="div p-1">
                         <form class="d-flex" action="{{ route('products.index') }}" method="GET" role="search">
                             <input class="form-control" type="text" name="term" id="term" placeholder="Search"
@@ -95,19 +95,6 @@
                         <div class="ps-1"></div>
                         <a class="btn btn-sm btn-outline-success mb-2" href="{{ route('sales.index') }}">Sales</a>
                     </div>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="card mt-2">
-                <div class="p-2">
-                    <div class="fs-4 fw-bold">Top Sales</div>
-                    @foreach ($topSales as $sale)
-                        @if ($sale->totalSales != null)
-                            <a class="btn btn-sm w-100 btn-outline-danger mb-2">RM{{ $sale->totalSales }}</a>
-                        @endif
-                    @endforeach
                 </div>
             </div>
 

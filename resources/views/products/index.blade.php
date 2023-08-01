@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <div class="display-4 mt-4">All Products</div>
+        <div class="display-2">All Products</div>
         <a onclick="return showQuantity()" id="totalItems"
             class="fw-bold text-decoration-none text-dark badge bg-warning rounded-pill"> TOTAL : {{ $totalQuantity }}</a>
 

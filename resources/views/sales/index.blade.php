@@ -4,13 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
 
-            <div class="fw-bold display-6 mt-2 mb-2">Sales Record</div>
-
-            <div class="">
-                <div class="">
-
-                </div>
-            </div>
+            <div class="display-2 mb-2">Sales Record</div>
 
             <div class="col-9">
                 <table class="table table-striped border">
@@ -56,7 +50,7 @@
                 <div class="card rounded-0">
                     <div class="h3 text-center mt-2">Total Sales</div>
                     <div class="p-2">
-                        <a class="btn btn-sm btn-outline-dark w-100 mb-2 disabled">TOTAL SALE = RM
+                        <a class="btn btn-sm btn-outline-dark w-100 mb-2 disabled">RM
                             {{ number_format($allSalesTotal, 2) }}</a>
                     </div>
                 </div>

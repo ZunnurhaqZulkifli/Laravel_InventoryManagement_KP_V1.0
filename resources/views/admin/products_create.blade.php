@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
 
-        <div class="display-2 text-center">Add A Product</div>
+        <div class="display-2">Add A Product</div>
 
         <hr>
 

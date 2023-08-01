@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="display-6">ALL USERS</div>
+        <div class="display-2">All Users</div>
         <hr>
 
         <div class="row">

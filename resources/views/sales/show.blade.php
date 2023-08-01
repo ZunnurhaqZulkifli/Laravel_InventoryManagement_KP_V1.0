@@ -3,13 +3,10 @@
 @section('content')
     <div class="container">
 
-        <div class="mt-4">
-            <div class="display-3 fw-bold">Sales<a class="fw-light text-decoration-none text-dark">_{{ $sale->id }}</a>
-            </div>
-        </div>
+        <div class="display-2 fw-bold">Sales<a class="fw-light text-decoration-none text-dark">_{{ $sale->id }}</a></div>
 
-        <div class="card w-50">
-            <div class="p-4">
+        <div class="card">
+            <div class="p-2">
 
                 <a class="text-decoration-none text-dark">{{ $sale->id }}_{{ $sale->created_at->format('d/m/Y H:i') }}</a>
             <br>
