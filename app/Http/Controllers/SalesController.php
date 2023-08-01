@@ -78,22 +78,22 @@ class SalesController extends Controller
 
             $products = session()->get('cart');
 
-            $q0 = collect($products)->pluck('name')->
-                implode(',', array_map(function ($item) {
-                return implode(',', $item);
-            }, $products));
+                $q0 = collect($products)->pluck('name')->
+                    implode(',', array_map(function ($item) {
+                    return implode(',', $item);
+                }, $products));
 
-            $q1 = collect($products)->pluck('quantity')->
-                implode(',', array_map(function ($item) {
-                return implode(',', $item);
-            }, $products));
+                $q1 = collect($products)->pluck('quantity')->
+                    implode(',', array_map(function ($item) {
+                    return implode(',', $item);
+                }, $products));
 
-            $q2 = collect($products)->pluck('id')->
-                implode(',', array_map(function ($item) {
-                return implode(',', $item);
-            }, $products));
+                $q2 = collect($products)->pluck('id')->
+                    implode(',', array_map(function ($item) {
+                    return implode(',', $item);
+                }, $products));
 
-            $q3 = Auth::user()->id;
+                $q3 = Auth::user()->id;
 
 
             $sale = Sales::create([

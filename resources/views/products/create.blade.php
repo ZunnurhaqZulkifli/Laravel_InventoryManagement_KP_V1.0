@@ -67,6 +67,13 @@
                                         value="{{ old('quantity', $product->quantity ?? 1) }}">
                                 </div>
                             </div>
+
+                            <div class="form-group-card">
+                                <div class="p-2">
+                                    <input type="number" name="on_pressed" class="form-control" placeholder="1"
+                                        value="{{ old('on_pressed', $product->on_pressed ?? 1) }}" hidden>
+                                </div>
+                            </div>
                         </div>
                         <button type="submit" class="mt-4 btn btn-sm col-12 btn-outline-primary">Add Items</button>
                 </form>

@@ -67,9 +67,7 @@ class ProductsController extends Controller
 
     public function index(Request $request)
     {
-
-        $brandName = Products::with('brands');
-        $products = Products::with('brand', 'category', 'variation')->where([
+        $products = Products::where([
             [function ($query) use ($request) {
                 if (($term = $request->term)) {
                     $brands = Brand::where('name', 'like', "%{$term}%")->get();
@@ -86,7 +84,7 @@ class ProductsController extends Controller
             }],
         ])
             ->orderBy("id", "asc")
-            ->paginate(100);
+            ->paginate(1000);
 
         $totalQuantity = $products->count('quantity');
         // dd($totalQuantity);
@@ -94,22 +92,33 @@ class ProductsController extends Controller
         return view('products.index',
             [
                 'products' => $products,
-                'brandName' => $brandName,
                 'totalQuantity' => $totalQuantity,
                 'key' => $key = 1,
                 ]) ->with('i', (request()->input('page', 1)) * 5
             );
     }
 
-    public function all()
-    {
-        $categories = Category::all();
-        $products = Products::with('category','brand', 'variation')->get();
-        
-        return view('products.all', [
-            'products' => $products,
+    public function all(Request $request)
+    {    
+        $categories = Category::where([
+            [function ($query) use ($request) {
+                if (($term = $request->term)) {
+
+                    $query
+                        ->orWhere('name' , 'LIKE', '%' . $term . '%')
+                        ->get();
+                }
+            }],
+        ])
+            ->orderBy("id", "asc")
+            ->paginate(1000);
+
+        return view('products.all', 
+        [
             'categories' => $categories,
-        ]);
+            'items' => $items = 10,
+            ])->with('i', (request()->input('page', 1)) * 5
+        );
     }
 
     public function store(StoreProducts $request)

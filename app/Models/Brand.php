@@ -17,12 +17,12 @@ class Brand extends Model
         return $this->hasMany(Products::class);
     }
 
-    public function categories()
+    public function category()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
     
-    public function variations()
+    public function variation()
     {
         return $this->hasMany(Variation::class);
     }

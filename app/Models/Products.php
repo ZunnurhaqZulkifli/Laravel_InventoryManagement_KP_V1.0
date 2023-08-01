@@ -12,12 +12,12 @@ class Products extends Model
     protected $table = 'products';
     protected $fillable = ['name', 'price', 'description', 'category_id', 'brand_id', 'variation_id', 'quantity', 'flavour', 'on_pressed'];
     
-    public function category() //make sure this is correct
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function brand() //make sure this is also correct!
+    public function brand()
     {
         return $this->belongsTo(Brand::class);
     }
@@ -27,14 +27,19 @@ class Products extends Model
         return $this->belongsTo(Variation::class);
     }
     
-    public function variations()
-    {
-        return $this->belongsToMany(Variation::class);
-    }
+    // public function variations()
+    // {
+        // return $this->belongsToMany(Variation::class);
+    // }
 
     public function image()
     {
         return $this->hasOne(Image::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasOne(Category::class);
     }
 
 }
