@@ -28,8 +28,8 @@
                             <tr>
                                 <td>{{ $key++ }}</td>
                                 <td>
-                                    <a href="{{ route('sales.show', [$sale->id]) }}">Invoice
-                                        Details_{{ $sale->created_at->format('d/m/Y H:i') }}</a>
+                                    <a class="text-decoration-none text-dark"
+                                        href="{{ route('sales.show', [$sale->id]) }}">{{ $sale->id }}_{{ $sale->created_at->format('d/m/Y H:i') }}</a>
                                 </td>
 
                                 <td>

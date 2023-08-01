@@ -17,7 +17,7 @@
                                         class="border rounded object-fit-contain img-fluid border-warning"
                                         src="{{ $productImage->image->url() }}" style="height: 150px;width:280px;"></a>
                             @else
-                                <a class="btn btn-lg btn-outline-dark mt-2 mb-2" style="width:280px; height:150px;"
+                                <a class="btn btn-lg btn-outline-dark" style="width:280px; height:150px;"
                                     href="{{ route('products.show', [$productImage->id]) }}">{{ $productImage->name }}</a>
                             @endif
                         @endforeach
@@ -28,7 +28,7 @@
                                         class="border rounded object-fit-contain img-fluid border-warning"
                                         src="{{ $productImage->image->url() }}" style="height: 150px;width:280px;"></a>
                             @else
-                                <a class="btn btn-lg btn-outline-dark mt-2 mb-2" style="width:280px; height:150px;"
+                                <a class="btn btn-lg btn-outline-dark" style="width:280px; height:150px;"
                                     href="{{ route('products.show', [$productImage->id]) }}">{{ $productImage->name }}</a>
                             @endif
                         @endforeach
@@ -93,11 +93,11 @@
                 <p>Dimentions for a proper photo is</p>
                 <hr>
                 <div class="text-center">
-                    @can('update', $categoryImages)
+                    @can('view', $categoryImages)
                         @foreach ($categoryImages as $categoryImage)
                             @if ($categoryImage->image)
                                 <a href="{{ route('categories.show', [$categoryImage->id]) }}"><img
-                                        class="border-warning border rounded img-fluid mb-2 mt-2"
+                                        class="border-warning object-fit-contain border rounded img-fluid mb-2 mt-2"
                                         src="{{ $categoryImage->image->url() }}" style="height: 150px;width:280px;"></a>
                             @else
                                 <a class="btn btn-lg btn-outline-dark mt-2 mb-2" style="width:280px; height:150px;"
@@ -108,7 +108,7 @@
                         @foreach ($categoryImages as $categoryImage)
                             @if ($categoryImage->image)
                                 <a href="{{ route('categories.show', [$categoryImage->id]) }}">
-                                    <img class="border-warning border rounded img-fluid mb-2 mt-2"
+                                    <img class="border-warning object-fit-contain border rounded img-fluid mb-2 mt-2"
                                         src="{{ $categoryImage->image->url() }}" style="height: 150px;width:280px;">
                                 </a>
                             @else

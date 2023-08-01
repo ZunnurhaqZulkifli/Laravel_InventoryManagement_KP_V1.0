@@ -16,7 +16,8 @@
 
         <hr>
 
-        <div class="mt-2 mb-4">
+
+        <div class="card mb-2 p-1">
             <form class="d-flex" action="{{ route('products.index') }}" method="GET" role="search">
                 <input class="form-control" type="text" name="term" id="term" placeholder="Search"
                     aria-label="Search" value="{{ request()->get('term', '') }}">
@@ -31,7 +32,7 @@
             </form>
         </div>
 
-        <div class="card shadow-sm rounded border-primary">
+        <div class="card shadow-sm rounded border-info">
             <table class="table mt-1">
                 <thead>
                     <tr>
@@ -57,7 +58,8 @@
                                     href="{{ route('brands.show', [$product->brand->id]) }}">{{ $product->brand->name }}</a>
                             </td>
                             <td><a class="text-dark"
-                                    href="{{ route('variation.show', [$product->variation->id]) }}">{{ $product->variation->name }}</a></td>
+                                    href="{{ route('variation.show', [$product->variation->id]) }}">{{ $product->variation->name }}</a>
+                            </td>
                             <td></td>
                             <td><a class="text-dark"
                                     href="{{ route('categories.show', [$product->category->id]) }}">{{ $product->category->name }}</a>

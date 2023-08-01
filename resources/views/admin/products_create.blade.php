@@ -4,8 +4,8 @@
 @section('content')
     <div class="container">
 
-        <div class="display-2">Admin Product Create</div>
-        
+        <div class="display-2 text-center">Add A Product</div>
+
         <hr>
 
         <div class="card">
@@ -70,6 +70,13 @@
                                         value="{{ old('quantity', $product->quantity ?? 1) }}">
                                 </div>
                             </div>
+
+                            <div class="form-group-card">
+                                <div class="p-2">
+                                    <input type="number" name="on_pressed" class="form-control" placeholder="1"
+                                        value="{{ old('on_pressed', $product->quantity ?? 1) }}" hidden>
+                                </div>
+                            </div>
                         </div>
 
                         <button type="submit" class="mt-4 btn btn-sm col-12 btn-outline-primary">Add Items</button>
@@ -78,124 +85,135 @@
         </div>
     </div>
 
+<hr>
+
     @can('create')
-        <div class="card bg-shadow-sm mt-4 mb-4">
 
-            <div class="fw-bold display-5 text-center mt-4">Master Create</div>
-            
-            <div class="p-2">
-                <div class="card">
-                    
-                    
-                    <div class="p-3">
-                        <div class="fw-bold h5 text-center">Create New Category</div>
-                        <div class="card">
-                            <div class="p-2">
-                                <h4>Lists of all the categories</h4>
-                                @foreach ($categories as $category)
-                                    <a href="{{ route('categories.edit', [$category->id]) }}"
-                                        class="btn btn-sm mb-1 btn-outline-dark">{{ $category->name }}</a> |
-                                @endforeach
-                            </div>
-                        </div>
+        <a class="mb-4 w-100 btn btn-sm btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+            aria-expanded="false" aria-controls="collapseExample">
+             Add New | Category | Brand | Variation 
+        </a>
 
-                        <div class="form-group">
-                            <form method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
-                                @csrf
+        <div class="collapse" id="collapseExample">
 
-                                <div class="form-group mt-2">
-                                    <label>Categories</label>
-                                    <input name="name" type="text" class="form-control" placeholder="Drinks"
-                                        value="{{ old('name', $category->name ?? null) }}" required>
+            <div class="card bg-shadow-sm mt-4 mb-4">
+
+                <div class="fw-bold display-5 text-center mt-4">Master Create</div>
+
+                <div class="p-2">
+                    <div class="card">
+
+
+                        <div class="p-3">
+                            <div class="fw-bold h5 text-center">Create New Category</div>
+                            <div class="card">
+                                <div class="p-2">
+                                    <h4>Lists of all the categories</h4>
+                                    @foreach ($categories as $category)
+                                        <a href="{{ route('categories.edit', [$category->id]) }}"
+                                            class="btn btn-sm mb-1 btn-outline-dark">{{ $category->name }}</a> |
+                                    @endforeach
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    <label class="mt-2">(Not Required) Add Images </label>
-                                    <div class="form-group-card">
-                                        <div class="p-2">
-                                            <input type="file" name="thumbnail" class="form-control-file">
+                            <div class="form-group">
+                                <form method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
+                                    @csrf
+
+                                    <div class="form-group mt-2">
+                                        <label>Categories</label>
+                                        <input name="name" type="text" class="form-control" placeholder="Drinks"
+                                            value="{{ old('name', $category->name ?? null) }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="mt-2">(Not Required) Add Images </label>
+                                        <div class="form-group-card">
+                                            <div class="p-2">
+                                                <input type="file" name="thumbnail" class="form-control-file">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <button type="submit" class="mt-2 btn btn-sm w-100 btn-outline-dark">Create !</button>
-                            </form>
+                                    <button type="submit" class="mt-2 btn btn-sm w-100 btn-outline-dark">Create !</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <hr>
+                    <hr>
 
-                <div class="card">
-                    <div class="p-3">
-                        
-                        <div class="fw-bold h5 text-center">Create New Brand</div>
+                    <div class="card">
+                        <div class="p-3">
 
-                        <div class="card">
-                            <div class="p-3">
-                                <h4>Lists of all the brands</h4>
-                                @foreach ($brands as $brand)
-                                    <a href="{{ route('brands.edit', ['brand' => $brand->id]) }}"
-                                        class="btn btn-sm mb-2 btn-outline-dark">{{ $brand->name }}</a> |
-                                @endforeach
-                            </div>
-                        </div>
+                            <div class="fw-bold h5 text-center">Create New Brand</div>
 
-                        <form method="POST" action="{{ route('brands.store') }}" enctype="multipart/from-data">
-                            @csrf
-                            <div>
-                                <div class="h4 mt-3">Add a new brand</div>
-                                <input name="name" type="text" class="form-control" placeholder="Coca Cola"
-                                    value="{{ old('name', $brand->name ?? null) }}" required>
-                            </div>
-
-                            <div class="form-group mt-2">
-                                <label for="category_id">Category</label>
-                                <select class="form-control" name="category_id" id="category_id">
-                                    <option>Default</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <div class="card">
+                                <div class="p-3">
+                                    <h4>Lists of all the brands</h4>
+                                    @foreach ($brands as $brand)
+                                        <a href="{{ route('brands.edit', ['brand' => $brand->id]) }}"
+                                            class="btn btn-sm mb-2 btn-outline-dark">{{ $brand->name }}</a> |
                                     @endforeach
-                                </select>
+                                </div>
                             </div>
 
-                            <button type="submit" class="mt-4 btn btn-sm col-12 btn-outline-dark">Add Brands</button>
-                        </form>
-                    </div>
-                </div>
-
-                <hr>
-                <div class="card">
-                    <div class="p-3">
-
-                        <div class="fw-bold h5 text-center">Create New Variation</div>
-
-                        <div class="card">
-                            <div class="p-2">
-                                <h4>Lists of all the variations</h4>
-                                @foreach ($variations as $variation)
-                                    <a href="{{ route('variation.edit', [$variation->id]) }}"
-                                        class="btn btn-sm mb-2 btn-outline-dark">{{ $variation->name }}</a> |
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <form method="POST" action="{{ route('variation.store') }}" enctype="multipart/from-data">
+                            <form method="POST" action="{{ route('brands.store') }}" enctype="multipart/from-data">
                                 @csrf
                                 <div>
-                                    <div class="h4">Add a new variation</div>
-                                    <input name="name" type="text" class="form-control" placeholder="Tin / Bottle"
-                                        value="{{ old('name', $variation->name ?? null) }}" required>
+                                    <div class="h4 mt-3">Add a new brand</div>
+                                    <input name="name" type="text" class="form-control" placeholder="Coca Cola"
+                                        value="{{ old('name', $brand->name ?? null) }}" required>
                                 </div>
 
-                                <button type="submit" class="mt-4 btn btn-sm col-12 btn-outline-dark">Add
-                                    Variation</button>
+                                <div class="form-group mt-2">
+                                    <label for="category_id">Category</label>
+                                    <select class="form-control" name="category_id" id="category_id">
+                                        <option>Default</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="mt-4 btn btn-sm col-12 btn-outline-dark">Add Brands</button>
                             </form>
                         </div>
                     </div>
+
+                    <hr>
+                    <div class="card">
+                        <div class="p-3">
+
+                            <div class="fw-bold h5 text-center">Create New Variation</div>
+
+                            <div class="card">
+                                <div class="p-2">
+                                    <h4>Lists of all the variations</h4>
+                                    @foreach ($variations as $variation)
+                                        <a href="{{ route('variation.edit', [$variation->id]) }}"
+                                            class="btn btn-sm mb-2 btn-outline-dark">{{ $variation->name }}</a> |
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <form method="POST" action="{{ route('variation.store') }}" enctype="multipart/from-data">
+                                    @csrf
+                                    <div>
+                                        <div class="h4">Add a new variation</div>
+                                        <input name="name" type="text" class="form-control" placeholder="Tin / Bottle"
+                                            value="{{ old('name', $variation->name ?? null) }}" required>
+                                    </div>
+
+                                    <button type="submit" class="mt-4 btn btn-sm col-12 btn-outline-dark">Add
+                                        Variation</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                 </div>
-                <hr>
             </div>
         </div>
     @endcan

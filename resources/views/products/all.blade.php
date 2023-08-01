@@ -1,16 +1,14 @@
 @extends('layout')
 
 @section('content')
-    <div class="display-4 fw-bold">Products by Category</div>
-    <hr>
+    <div class="display-4 fw-bold">Products Catalogue</div>
     <div class="mt-4">
-
         <div class="card">
             <div class="p-1">
-                <div class="mt-2 mb-4">
+                <div class="div">
                     <form class="d-flex" action="{{ route('products.all') }}" method="GET" role="search">
-                        <input class="form-control" type="text" name="term" id="term" placeholder="Search by Category"
-                            aria-label="Search" value="{{ request()->get('term', '') }}">
+                        <input class="form-control" type="text" name="term" id="term"
+                            placeholder="Search by Category" aria-label="Search" value="{{ request()->get('term', '') }}">
                         <div class="ps-1"></div>
                         <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"
                                 style="color: #198754;"></i></button>
@@ -23,6 +21,8 @@
                 </div>
             </div>
         </div>
+
+        <hr>
 
         @forelse($categories as $category)
             @if ($category->products->count() != 0)
@@ -62,8 +62,22 @@
 
                                         <div class="card-footer bg-white text-center">
                                             <div class="d-inline">
-                                                <a class="text-dark text-decoration-none fw-bold h4">RM
-                                                    {{ $product->price }}</a>
+                                                <a class="text-dark text-decoration-none fw-bold h1">RM
+                                                    {{ $product->price }}
+                                                </a>
+
+                                                @if ($product->quantity > 0)
+                                                    <span class="border rounded border-dark">
+                                                        <a class="p-1 text-dark text-decoration-none fw-bold">{{ $product->quantity }}
+                                                            Left</a>
+                                                    </span>
+                                                @else
+                                                    <span class="border rounded border-dark">
+                                                        <a class="p-1 text-danger text-decoration-none fw-bold">{{ $product->quantity }}
+                                                            Left</a>
+                                                    </span>
+                                                @endif
+
                                                 <br>
 
                                                 <a href="{{ route('products.show', $product->id) }}"

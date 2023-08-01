@@ -70,16 +70,12 @@
         <hr>
 
         @can('view')
-            <div class="display-6">Sales Performance</div>
-
-            <hr>
-
-            <p>
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+            <div class="mt-4 mb-4 text-center">
+                <a class="w-50 btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                     aria-expanded="false" aria-controls="collapseExample">
-                    Sales Performance
+                    User Sales Performance
                 </a>
-            </p>
+            </div>
 
             <div class="collapse" id="collapseExample">
                 <div class="row">

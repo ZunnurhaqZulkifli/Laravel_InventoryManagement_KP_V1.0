@@ -74,7 +74,6 @@ Route::resource('/gallery', GalleryController::class);
 
 //Admins Only
 Route::get('/admin/products/create', [AdminController::class, 'create'])->name('admin.products.create');
-
 Route::get('/users', [UsersController::class, 'index'])->name('users.index')->middleware('can:users.index');
 Route::get('/users/{id}', [UsersController::class, 'show'])->name('users.show')->middleware('can:users.show');
 Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->name('users.edit')->middleware('can:users.edit');

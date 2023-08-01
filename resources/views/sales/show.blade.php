@@ -11,7 +11,7 @@
         <div class="card w-50">
             <div class="p-4">
 
-                <a class="text-decoration-none text-dark">Recipt ID : {{ $sale->id }}_{{ $sale->created_at->format('d/m/Y H:i') }}</a>
+                <a class="text-decoration-none text-dark">{{ $sale->id }}_{{ $sale->created_at->format('d/m/Y H:i') }}</a>
             <br>
                 <a href="{{ route('sales.user',[$userId]) }}" class="">Sold By : Seller ID_{{ $userId }}</a>
                 

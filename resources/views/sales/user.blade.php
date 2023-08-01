@@ -21,7 +21,7 @@
                         <tr>
                             <td>{{ $key++ }}</td>
                             <td><a class="text-decoration-none text-dark"
-                                    href="{{ route('sales.show', [$sale->id]) }}">{{ $sale->id }}.{{ $sale->created_at->format('d/m/Y H:i') }}</a>
+                                    href="{{ route('sales.show', [$sale->id]) }}">{{ $sale->id }}_{{ $sale->created_at->format('d/m/Y H:i') }}</a>
                             </td>
                             <td><a class="text-decoration-none text-dark">RM {{ $sale->totalSales }}</a></td>
                         </tr>

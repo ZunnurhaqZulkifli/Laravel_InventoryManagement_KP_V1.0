@@ -64,7 +64,7 @@ class CategoriesController extends Controller
         }
 
         Toastr::success('Added a new category!', 'Category Created', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('products.create');
+        return redirect()->route('admin.products.create');
     }
 
 
@@ -111,6 +111,6 @@ class CategoriesController extends Controller
         $category->delete();
 
         Toastr::error('Category Successfully Removed!', 'Category Deleted!', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('products.create');
+        return redirect()->route('admin.products.create');
     }
 }

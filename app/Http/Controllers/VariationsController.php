@@ -40,7 +40,7 @@ class VariationsController extends Controller
         $variation->save();
 
         Toastr::success('Variation Successfully Created!', 'Variation Created!', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('products.create');
+        return redirect()->route('admin.products.create');
     }
 
     public function show($id)
@@ -55,7 +55,7 @@ class VariationsController extends Controller
         $variation->delete();
 
         Toastr::error('Variation Successfully Removed!', 'Variation Deleted!', ["positionClass" => "toast-top-right"]);
-        return view('home');
+        return view('admin.products.create');
     }
 
     public function edit($id)

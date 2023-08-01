@@ -50,7 +50,11 @@
                 <i class="fa-solid fa-house"></i> Home</a>
             <a class="btn btn-outline-primary" href="{{ route('products.index') }}">
                 <i class="fa-solid fa-bag-shopping"></i> Products</a>
-            <a class="btn btn-outline-primary" href="{{ route('products.create') }}">
+            @can('create')
+                <a class="btn btn-outline-primary" href="{{ route('admin.products.create') }}">
+                @else
+                <a class="btn btn-outline-primary" href="{{ route('products.create') }}">
+            @endcan
                 <i class="fa-solid fa-barcode"></i> Create</a>
             <a class="btn btn-outline-primary" href="{{ route('products.all') }}">
                 <i class="fa-solid fa-filter"></i> Category</a>
@@ -93,43 +97,36 @@
                     <div class="d-flex justify-content-center">
 
                         <a class="btn btn-outline-dark" href="{{ route('shopping.cart') }}">
-                            <i class="fa fa-shopping-cart" style="color: #ff4800"></i></a>
+                            <i class="fa fa-shopping-cart"></i> Cart</a>
 
                         <div class="ps-1"></div>
 
                         <a href="{{ route('sales.index') }}" class="btn btn-outline-dark"><i
-                                class="fa-solid fa-cash-register" style="color: #ff4800"></i></a>
+                                class="fa-solid fa-cash-register"></i> Sales</a>
 
                         <div class="ps-1"></div>
 
                         <a href="{{ route('products.stats') }}" class="btn btn-outline-dark"><i
-                                class="fa-solid fa-chart-line" style="color: #ff4800"></i></a>
+                                class="fa-solid fa-chart-line"></i> Stats</a>
 
                         <div class="ps-1"></div>
 
                         @guest
                             @if (Route::has('login'))
-                                <a class="p-2 btn btn-sm btn-outline-dark" href="{{ route('login') }}"><i
-                                        class="fab fa-laravel" style="color: #ff4800"></i> LOGIN</a>
+                                <a class="btn btn-outline-dark" href="{{ route('login') }}"><i
+                                        class="fab fa-laravel"></i> Login</a>
                             @endif
                         @else
                             @csrf
-                            <a class="p-2 btn btn btn-outline-dark" href="{{ route('logout') }}" style="color: #ff4800"
+                            <a class="btn btn-outline-dark" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                LOGOUT</a>
+                                <i class="fab fa-laravel"></i> Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         @endguest
 
                         <div class="ps-1"></div>
-                        <a class="btn btn-outline-dark" href="{{ url()->previous() }}" style="color: #ff4800">BACK</a>
-                    </div>
-
-                    <div class="form-check form-switch mt-2">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"
-                            checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Dark Mode</label>
                     </div>
                 </div>
             </div>
@@ -183,9 +180,9 @@
                     @can('create')
                         <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-outline-dark w-100">Master
                             Create</a>
+
+                        <hr>
                     @endcan
-                    
-                    <hr>
                     
                     <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('gallery.index') }}"><i
                             class="fa-regular fa-images"></i> Gallery Images</a>

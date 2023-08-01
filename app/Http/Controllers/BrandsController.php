@@ -59,7 +59,7 @@ class BrandsController extends Controller
         $brand->save();
 
         Toastr::success('Brand Created Successfully', 'Brand Created', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('products.create');
+        return redirect()->route('admin.products.create');
     }
 
     public function edit($id)
@@ -100,6 +100,6 @@ class BrandsController extends Controller
         $brand->delete();
 
         Toastr::error('Brand Deleted Successfully', 'Brand Deleted!', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('brands.create');
+        return redirect()->route('admin.products.create');
     }
 }

@@ -116,7 +116,7 @@ class ProductsController extends Controller
         return view('products.all', 
         [
             'categories' => $categories,
-            'items' => $items = 10,
+            'items' => $items = 100,
             ])->with('i', (request()->input('page', 1)) * 5
         );
     }
