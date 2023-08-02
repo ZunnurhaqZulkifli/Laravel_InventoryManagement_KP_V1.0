@@ -43,21 +43,6 @@ class VariationsController extends Controller
         return redirect()->route('admin.products.create');
     }
 
-    public function show($id)
-    {
-        $variation = Variation::findOrFail($id);
-        return view('variation.show', compact('variation'));
-    }
-
-    public function destroy($id)
-    {
-        $variation = Variation::findOrfail($id);
-        $variation->delete();
-
-        Toastr::error('Variation Successfully Removed!', 'Variation Deleted!', ["positionClass" => "toast-top-right"]);
-        return view('admin.products.create');
-    }
-
     public function edit($id)
     {
         $variation = Variation::findOrFail($id);
@@ -88,5 +73,20 @@ class VariationsController extends Controller
 
         Toastr::info('Variation Updated Successfully', 'Variation Updated', ["positionClass" => "toast-top-right"]);
         return redirect()->route('home');
+    }
+
+    public function show($id)
+    {
+        $variation = Variation::findOrFail($id);
+        return view('variation.show', compact('variation'));
+    }
+
+    public function destroy($id)
+    {
+        $variation = Variation::findOrfail($id);
+        $variation->delete();
+
+        Toastr::error('Variation Successfully Removed!', 'Variation Deleted!', ["positionClass" => "toast-top-right"]);
+        return view('admin.products.create');
     }
 }

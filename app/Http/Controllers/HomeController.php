@@ -20,6 +20,7 @@ class HomeController extends Controller
         $hotitems = Products::with('brand')
             ->where('on_pressed', '>=', '5')
             ->orderBy('on_pressed', 'desc')
+            ->take(3)
             ->get();
 
         $topSales = User::with(['sales' => function ($query) {
@@ -31,14 +32,13 @@ class HomeController extends Controller
             ->get();
 
         $hotimages = Products::with('brand')
-            ->orderBy('price', 'desc')
+            ->where('on_pressed', '>=', '5')
+            ->orderBy('on_pressed', 'desc')
             ->take(4)
             ->get();
 
-        $lowstocks = Products::where('quantity', '<=', '2')->get();
+        $lowstocks = Products::where('quantity', '<=', '2')->take(3)->get();
         $total = Sales::all()->sum('totalSales');
-
-        //Mainly for images Purposes
         $images = Gallery::orderBy('created_at', 'asc')->take(3)->get();
 
         return view('home.home', [

@@ -22,49 +22,6 @@ class ProductsController extends Controller
             ->only(['show', 'create', 'store', 'edit', 'update', 'destroy', 'all', 'categories', 'productCart', 'stats', 'index']);
     }
 
-    public function hotItem()
-    {
-        $hotitems = Products::with('brand', 'variation')->orderBy('price', 'desc')->take(1)->get();
-
-        return view('best.seller', [
-            'hotitems' => $hotitems,
-        ]);
-    }
-
-    public function show($id)
-    {
-        $products = Products::with('variation')->findOrFail($id);
-
-        // dd($products);
-
-        return view('products.show', [
-            'products' => $products,
-        ]);
-    }
-
-    public function edit($id)
-    {
-        $product = Products::findOrFail($id);
-        $categories = Category::all();
-        $brands = Brand::all();
-        $variations = Variation::all();
-
-        return view('products.edit', compact('categories', 'product', 'brands', 'variations'));
-    }
-
-    public function create()
-    {
-        $categories = Category::all();
-        $brands = Brand::all();
-        $variations = Variation::all();
-
-        return view('products.create', [
-            'categories' => $categories,
-            'brands' => $brands,
-            'variations' => $variations,
-        ]);
-    }
-
     public function index(Request $request)
     {
         $products = Products::where([
@@ -121,15 +78,37 @@ class ProductsController extends Controller
         );
     }
 
+    public function show($id)
+    {
+        $products = Products::with('variation')->findOrFail($id);
+
+        // dd($products);
+
+        return view('products.show', [
+            'products' => $products,
+        ]);
+    }
+
+    public function create()
+    {
+        $categories = Category::all();
+        $brands = Brand::all();
+        $variations = Variation::all();
+
+        return view('products.create', [
+            'categories' => $categories,
+            'brands' => $brands,
+            'variations' => $variations,
+        ]);
+    }
+
     public function store(StoreProducts $request)
     {
 
-        //logic behind validation is required
         $validatedData = $request->validated();
         $validatedData['products_id'] = $request->id;
         $product = Products::create($validatedData);
 
-        //this is where your images is saved
         if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('Products_Images');
             $product->image()->save(
@@ -137,11 +116,18 @@ class ProductsController extends Controller
             );
         }
 
-        // dd($product);
-
-        //this is the route rerouting
         Toastr::success('Products Created Successfully', 'Product Created', ["positionClass" => "toast-top-right"]);
         return redirect()->route('products.show', [$product->id]);
+    }
+
+    public function edit($id)
+    {
+        $product = Products::findOrFail($id);
+        $categories = Category::all();
+        $brands = Brand::all();
+        $variations = Variation::all();
+
+        return view('products.edit', compact('categories', 'product', 'brands', 'variations'));
     }
 
     public function update(StoreProducts $request, $id)
@@ -170,19 +156,6 @@ class ProductsController extends Controller
         return redirect()->route('products.show', [$product->id]);
     }
 
-    public function categories()
-    {
-        $brands = Brand::all();
-        $category = Category::all();
-        $products = Products::with('category', 'brand', 'variation')->get();
-
-        return view('products.categories', [
-            'products' => $products,
-            'categories' => Category::with('products')->get(),
-            'brands' => $brands,
-        ]);
-    }
-
     public function destroy($id)
     {
         $product = Products::findOrFail($id);
@@ -190,20 +163,6 @@ class ProductsController extends Controller
 
         Toastr::error('Products Successfully Deleted', 'Products Deleted!', ["positionClass" => "toast-top-right"]);
         return redirect()->route('products.index');
-    }
-
-    public function stats()
-    {
-        $products = Products::all();
-        $hotitems = Products::orderBy('price', 'desc')->take(2)->get();
-
-        // dd($products);
-
-        return view('products.stats', [
-            'products' => $products,
-            'hotitems' => $hotitems,
-            'key' => $key = 1,
-        ]);
     }
 
     public function cart(Request $request)
@@ -244,6 +203,35 @@ class ProductsController extends Controller
         session()->put('cart', $cart);
         return redirect()->back();
     }
+
+    public function stats()
+    {
+        $products = Products::all();
+        
+        $hotitems = Products::with('brand')
+            ->where('on_pressed', '>=', '5')
+            ->orderBy('on_pressed', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('products.stats', [
+            'products' => $products,
+            'hotitems' => $hotitems,
+            'key' => $key = 1,
+        ]);
+    }
+
+
+    public function hotItem()
+    {
+        $hotitems = Products::with('brand', 'variation')->orderBy('price', 'desc')->take(1)->get();
+
+        return view('best.seller', [
+            'hotitems' => $hotitems,
+        ]);
+    }
+
+    //Cart Functions
 
     public function subtractProductstoCart($id)
     {

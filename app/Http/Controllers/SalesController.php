@@ -72,7 +72,6 @@ class SalesController extends Controller
         $total = Sales::all()->sum('totalSales');
         $totalSales = $request->input('totalPrice');
         $cart = session()->get('cart', []);
-        // dd($item);
 
         if ($totalSales > 0) {
 
@@ -109,11 +108,11 @@ class SalesController extends Controller
                 session()->put('cart', $cart);
             }
 
-            Toastr::info('Sales Good!!!', 'Sales Good!!!', ["positionClass" => "toast-top-right"]);
+            Toastr::info('Sales Good!!!', 'Sales Created!', ["positionClass" => "toast-top-right"]);
             return redirect()->route('sales.index');
 
         } else {
-            Toastr::error('Cart Is Empty!!!', 'Sales Not Good!!!', ["positionClass" => "toast-top-right"]);
+            Toastr::error('Cart Is Empty!!!', 'Sales Failed!!', ["positionClass" => "toast-top-right"]);
             return view('cart');
         }
 

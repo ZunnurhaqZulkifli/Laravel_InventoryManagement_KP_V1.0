@@ -15,7 +15,7 @@ class GalleryController extends Controller
     public function __construct()
     {
         $this->middleware('auth')
-            ->only(['all', 'edit', 'create', 'store']);
+            ->only(['index', 'edit', 'create', 'store']);
     }
 
     public function index()
@@ -42,7 +42,7 @@ class GalleryController extends Controller
         }
 
         Toastr::success('Image Added Successfully', 'Image Added', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('gallery.all');
+        return redirect()->route('gallery.index');
     }
 
     public function create()
@@ -57,7 +57,7 @@ class GalleryController extends Controller
         $gallery->delete();
 
         Toastr::error('Image Deleted Successfully', 'Image Deleted!', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('gallery.all', compact('gallery'));
+        return redirect()->route('gallery.index', compact('gallery'));
     }
 
     public function show($id)

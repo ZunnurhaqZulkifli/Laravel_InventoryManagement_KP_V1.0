@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <hr>
+    <hr>
 
         @forelse($categories as $category)
             @if ($category->products->count() != 0)
@@ -30,7 +30,6 @@
                     <div class="card">
                         <div class="p-2">
                             <div class="text-center display-3 fw-bold">{{ $category->name }}</div>
-                            <hr>
                             <div class="row row-cols-1 row-cols-md-3 gx-2 gy-2">
                                 @foreach ($category->products->take($items) as $product)
                                     <div class="mt-2 mb-2 card border-warning mx-auto" style="width: 20em">
@@ -104,8 +103,6 @@
                 <hr>
             @endif
         @endforeach
-
-        <hr>
 
         <div class="mb-4">
             <a class="w-100 btn btn-sm btn-outline-dark" href="{{ route('products.create') }}">Add New Product</a>

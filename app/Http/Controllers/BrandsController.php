@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreBrands;
 use App\Models\Brand;
 use App\Models\Category;
@@ -15,7 +14,7 @@ class BrandsController extends Controller
     public function __construct()
     {
         $this->middleware('auth')
-            ->only(['show', 'create', 'update', 'allBrands']);
+            ->only(['show', 'create', 'update', 'all']);
     }
 
     public function index()
@@ -69,6 +68,17 @@ class BrandsController extends Controller
         return view('brands.edit', compact('brand'));
     }
 
+    public function update(StoreBrands $request, $id)
+    {
+        $brand = Brand::findOrFail($id);
+        $validatedData = $request->validated();
+        $brand->fill($validatedData);
+        $brand->save();
+
+        Toastr::info('Brand Updated Successfully', 'Brand Updated', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('brands.create');
+    }
+
     public function show($id)
     {
         $brands = Brand::with('products')->findOrFail($id);
@@ -81,17 +91,6 @@ class BrandsController extends Controller
             'products' => $products,
             'variations' => $variations,
         ]);
-    }
-
-    public function update(StoreBrands $request, $id)
-    {
-        $brand = Brand::findOrFail($id);
-        $validatedData = $request->validated();
-        $brand->fill($validatedData);
-        $brand->save();
-
-        Toastr::info('Brand Updated Successfully', 'Brand Updated', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('brands.create');
     }
 
     public function destroy($id)

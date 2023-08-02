@@ -26,6 +26,12 @@ class CategoriesController extends Controller
         return view('categories.index', compact('categories', 'products'));
     }
 
+    public function all()
+    {
+        $categories = Category::all();
+        return view('categories.all', compact('categories'));
+    }
+
     public function show($id)
     {
         $category = Category::with('brands')->findOrFail($id);
@@ -67,12 +73,6 @@ class CategoriesController extends Controller
         return redirect()->route('admin.products.create');
     }
 
-
-    public function all()
-    {
-        $categories = Category::all();
-        return view('categories.all', compact('categories'));
-    }
     public function edit($id)
     {
         $category = Category::findOrFail($id);

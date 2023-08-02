@@ -35,7 +35,6 @@
 </head>
 
 <body>
-
     <div class="navbar navbar-dark d-flex flex-column flex-md-row p-3 px-md-4 mb-3 shadow">
 
         <div class="d-flex">
@@ -117,7 +116,6 @@
                                         class="fab fa-laravel"></i> Login</a>
                             @endif
                         @else
-                            @csrf
                             <a class="btn btn-outline-dark" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fab fa-laravel"></i> Logout</a>
@@ -173,22 +171,21 @@
                 <div class="p-2 text-center">
                     <div class="fs-5">Admin Pannel</div>
                     <hr>
-                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('sales.index') }}">Sales</a>
-
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('sales.index') }}"><i
+                        class="fa-solid fa-cash-register"></i> Sales Record</a>
                     <hr>
 
                     @can('create')
-                        <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-outline-dark w-100">Master
-                            Create</a>
-
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-outline-dark w-100"><i 
+                            class="fa-solid fa-user-gear"></i> Master Create</a>
                         <hr>
                     @endcan
                     
                     <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('gallery.index') }}"><i
                             class="fa-regular fa-images"></i> Gallery Images</a>
                     <hr>
-                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('products.stats') }}">Product
-                        Stats</a>
+                    <a class="btn btn-sm btn-outline-dark w-100" href="{{ route('products.stats') }}"><i
+                        class="fa-solid fa-chart-line"></i> Product Stats</a>
                     <hr>
                 </div>
 
@@ -215,8 +212,6 @@
     </div>
 
     @yield('scripts')
-
-    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 
 </html>

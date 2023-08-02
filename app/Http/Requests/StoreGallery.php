@@ -23,7 +23,7 @@ class StoreGallery extends FormRequest
     {
         return [
             'name' => 'min:1|max:50|required',
-            'thumbnail' => 'image|mimes:jpg,jpeg,png,gif,svg|max:2048|dimensions:max_height=1080, max_width=1920',
+            'thumbnail' => 'image|mimes:jpg,jpeg,png,gif,svg|max:2048|dimensions:max_height=1090, max_width=1920',
         ];
     }
 }

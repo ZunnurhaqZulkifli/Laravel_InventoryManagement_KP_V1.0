@@ -39,7 +39,7 @@
                         @foreach ($images as $image)
                             @if ($image->image != null)
                                 <div class="carousel-item">
-                                    <img src="{{ $image->image->url() }}" class="d-block img-fluid w-100" alt="...">
+                                    <img src="{{ $image->image->url() }}" class="d-block img-fluid w-100">
                                     <center><a>{{ $image->name }}</a></center>
                                 </div>
                             @else
@@ -83,6 +83,8 @@
 
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat expedita veritatis ducimus nisi quae odit,
                 sapiente maiores fugit, voluptate ipsum quia hic, dolorem in? Suscipit beatae autem eius iure voluptatibus.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium nostrum eius nulla eaque quam? Voluptatum
+                illo dicta consequatur, reiciendis, error debitis ex sed in laborum officiis quibusdam vel tenetur eaque.
             </p>
         </div>
 
