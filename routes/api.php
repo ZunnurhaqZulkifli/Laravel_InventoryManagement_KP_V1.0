@@ -21,4 +21,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('/products', ProductsController::class)->middleware('auth.session');
 Route::resource('/products', ProductsController::class)->middleware('auth.session');
-
