@@ -1,9 +1,6 @@
-@extends('layout')
-
-@section('content')
-    <div class="container">
+<div class="position-absolute top-50 start-50 translate-middle">
         <div class="row justify-content-center">
-            <div class="display-2">Total Sales<span class="fw-light h1"> (Today)</span></div>
+            <div class="display-2"><span class="fw-light h1"> TODAY'S TOTAL SALES REPORT</span></div>
             <div class="card">
                 <div class="col-12">
                     <table class="table table-striped">
@@ -42,8 +39,5 @@
                     </table>
                 </div>
             </div>
-            <a class="w-100 btn btn-sm btn-outline-success mt-2" href="{{ route('sales.index') }}">Total Sales</a>
-            <a class="w-100 btn btn-sm btn-outline-success mt-2" href="{{ route('sales.generateToday') }}" class="">Download single sale PDF</a>
         </div>
     </div>
-@endsection

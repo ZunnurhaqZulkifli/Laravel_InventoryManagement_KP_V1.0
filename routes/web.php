@@ -68,6 +68,8 @@ Route::get('/sales.today', [SalesController::class, 'salesToday'])->name('sales.
 Route::post('/sales/add', [SalesController::class, 'addtoTotalSale'])->name('sales.add');
 Route::get('/users/sales/{id}', [SalesController::class, 'salesByUser'])->name('sales.user');
 Route::get('/sales.yesterday', [SalesController::class, 'salesYesterday'])->name('sales.yesterday');
+Route::get('/sales.generate-pdf/{id}', [SalesController::class, 'generateSinglePDF'])->name('sales.generateSingle');
+Route::get('/sales.generate-pdf', [SalesController::class, 'generateTodayPDF'])->name('sales.generateToday');
 
 //Gallery Controller
 Route::resource('/gallery', GalleryController::class);

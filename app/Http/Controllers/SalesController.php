@@ -9,6 +9,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class SalesController extends Controller
 {
@@ -37,7 +38,6 @@ class SalesController extends Controller
 
         return view('sales.index', compact('allSales', 'products', 'allSalesTotal', 'totalSalesToday', 'totalSalesYesterday', 'key', 'totalSalesToday'));
     }
-
 
     public function show($id)
     {
@@ -77,23 +77,22 @@ class SalesController extends Controller
 
             $products = session()->get('cart');
 
-                $q0 = collect($products)->pluck('name')->
-                    implode(',', array_map(function ($item) {
-                    return implode(',', $item);
-                }, $products));
+            $q0 = collect($products)->pluck('name')->
+                implode(',', array_map(function ($item) {
+                return implode(',', $item);
+            }, $products));
 
-                $q1 = collect($products)->pluck('quantity')->
-                    implode(',', array_map(function ($item) {
-                    return implode(',', $item);
-                }, $products));
+            $q1 = collect($products)->pluck('quantity')->
+                implode(',', array_map(function ($item) {
+                return implode(',', $item);
+            }, $products));
 
-                $q2 = collect($products)->pluck('id')->
-                    implode(',', array_map(function ($item) {
-                    return implode(',', $item);
-                }, $products));
+            $q2 = collect($products)->pluck('id')->
+                implode(',', array_map(function ($item) {
+                return implode(',', $item);
+            }, $products));
 
-                $q3 = Auth::user()->id;
-
+            $q3 = Auth::user()->id;
 
             $sale = Sales::create([
                 'totalSales' => $request->input('totalPrice'),
@@ -135,7 +134,7 @@ class SalesController extends Controller
         $totalSalesToday = Sales::whereDate('created_at', Carbon::today()
                 ->toDateTimeString())->sum('totalSales');
 
-        $salesToday = Sales::whereDate('created_at',  Carbon::today()
+        $salesToday = Sales::whereDate('created_at', Carbon::today()
                 ->toDateTimeString())->get();
         $key = 1;
 
@@ -154,6 +153,43 @@ class SalesController extends Controller
         // dd($user);
 
         return view('sales.user', compact('mySales', 'myTotalSales', 'key', 'user'));
+    }
+
+    public function generateTodayPDF()
+    {
+        $totalSalesToday = Sales::whereDate('created_at', Carbon::today()
+                ->toDateTimeString())->sum('totalSales');
+
+        $salesToday = Sales::whereDate('created_at', Carbon::today()
+                ->toDateTimeString())->get();
+
+        $pdf = PDF::loadView('sales.printToday', 
+            [
+                'totalSalesToday' => $totalSalesToday,
+                'salesToday' => $salesToday,
+                'key' => $key = 1,
+            ]);
+
+        return $pdf->download('file.pdf');
+    }
+
+    public function generateSinglePDF($id)
+    {
+        $sale = Sales::findOrFail($id);
+        $items = explode('|', $sale->items);
+        $quantities = explode(',', $sale->quantity);
+        $productItems = explode(',', $sale->products_id);
+        $userId = ($sale->user_id);
+
+        $pdf = PDF::loadView('sales.printSingle', [
+            'sale' => $sale,
+            'items' => $items,
+            'userId' => $userId,
+            'quantities' => $quantities,
+            'productItems' => $productItems,
+        ]);
+        
+        return $pdf->download('file.pdf');
     }
 
 }

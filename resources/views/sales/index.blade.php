@@ -43,6 +43,7 @@
                         </tr>
                     </tfoot>
                 </table>
+                <a href="{{ route('sales.generateToday') }}" class="btn btn-sm btn-outline-success w-100">Download today's sale PDF</a>
             </div>
 
             <div class="col-3">
@@ -50,7 +51,7 @@
                 <div class="card rounded-0">
                     <div class="h3 text-center mt-2">Total Sales</div>
                     <div class="p-2">
-                        <a class="btn btn-sm btn-outline-dark w-100 mb-2 disabled">RM
+                        <a class="btn btn-sm btn-outline-dark w-100 mb-2">RM
                             {{ number_format($allSalesTotal, 2) }}</a>
                     </div>
                 </div>

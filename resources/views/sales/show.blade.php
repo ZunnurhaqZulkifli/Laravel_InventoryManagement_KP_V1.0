@@ -35,6 +35,8 @@
                         <a>TOTAL = RM{{ $sale->totalSales }}</a>
                     </div>
                 </div>
+
+                <a class="w-100 btn btn-sm btn-outline-success mt-2" href="{{ route('sales.generateSingle', [$sale->id]) }}" class="">Download single sale PDF</a>
             </div>
         </div>
 
