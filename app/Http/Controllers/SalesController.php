@@ -9,12 +9,21 @@ use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Reports\MyReport;
 
 class SalesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+     public function report()
+     {
+         $report = new MyReport;
+         $report->run();
+         return view('report', ["report"=>$report]);
+     }
+
     public function __construct()
     {
         $this->middleware('auth')

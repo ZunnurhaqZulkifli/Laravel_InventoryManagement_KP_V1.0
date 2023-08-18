@@ -9,6 +9,8 @@
         "blade-ui-kit/blade-icons": "^1.5",
         "brian2694/laravel-toastr": "^5.57",
         "guzzlehttp/guzzle": "^7.2",
+        "koolreport/core": "^6.1",
+        "koolreport/laravel": "^2.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
